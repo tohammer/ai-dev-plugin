@@ -1,0 +1,8 @@
+#!/bin/sh
+# Prints the core instructions; SessionStart stdout becomes session context.
+root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+if [ ! -r "$root/core.md" ]; then
+    echo "devflow: core.md not found in $root" >&2
+    exit 1
+fi
+cat "$root/core.md"
