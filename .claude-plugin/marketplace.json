@@ -1,0 +1,15 @@
+{
+  "name": "devflow-local",
+  "description": "Local marketplace for the devflow plugin",
+  "owner": {
+    "name": "Tobias Hammer"
+  },
+  "plugins": [
+    {
+      "name": "devflow",
+      "description": "Lightweight development workflow: spec, implement, review and wrap up with tiered subagents and a fixed docs layout",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}
