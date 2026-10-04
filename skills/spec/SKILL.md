@@ -29,7 +29,8 @@ for the feature is written in this skill.
 6. **Hand over.** Ask the user to review the file. If any point in it
    was not explicitly decided by the user, name it. Stop here.
 7. **Approve.** Set `Status: approved` only when the user says so. Apply
-   requested changes and ask again.
+   requested changes and ask again. Once approved, continue directly with
+   `/devflow:implement`; do not ask whether to start.
 
 ## The task list
 

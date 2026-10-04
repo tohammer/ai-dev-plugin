@@ -34,7 +34,7 @@ Trivial changes are done directly. A non-trivial feature goes through:
 
 | Step | Command | What happens |
 |---|---|---|
-| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list. You review it; only your approval sets `Status: approved`. |
+| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list. You review it; only your approval sets `Status: approved`, and implementation then starts without further prompting. |
 | 2 | `/devflow:implement` | Each task is briefed to an implementer subagent, checked and ticked off. Refuses a spec that is not approved. |
 | 3 | `/devflow:review` | Reviewer subagents examine the change. Findings are verified, then fixed or deferred to the backlog. |
 | 4 | `/devflow:wrapup` | README, architecture, ADRs, backlog and next-steps are brought in line with the change. |

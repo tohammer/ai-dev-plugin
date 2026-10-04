@@ -43,7 +43,7 @@ docs/next-steps.md                 what to do next, nothing else
 - Every non-obvious technical decision gets an ADR with the next free
   number. Accepted ADRs are not relitigated; supersede them with a new one.
 - Only the user approves a spec. Code for a non-trivial feature starts
-  from an approved spec.
+  from an approved spec; do not ask whether to start implementing it.
 - Finished items are deleted from backlog and next-steps; git keeps the
   history. Review findings that are deliberately not fixed go into the
   backlog with origin, reason and when to revisit.
