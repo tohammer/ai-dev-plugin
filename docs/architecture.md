@@ -20,7 +20,7 @@ orchestrating model and agent definitions for subagents. The only executable par
 ## How it fits together
 
 - At session start the hook prints `core.md`. That is the only always-on
-  context cost, so `core.md` is capped at 60 lines by a test.
+  context cost, so `core.md` is capped at 70 lines by a test.
 - `core.md` names the skills and agents. A skill is loaded when the user
   runs `/devflow:<name>` or the model matches its description.
 - Skills tell the orchestrator which agent to dispatch and when to

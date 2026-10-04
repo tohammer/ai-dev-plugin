@@ -14,6 +14,9 @@ You orchestrate; subagents write the code.
   missing.
 - Read the spec and the ADRs it links. Continue from the first unticked
   task.
+- Work on a feature branch. On the default branch, create one named
+  after the spec topic and switch to it; no worktree. If a feature
+  branch for this spec exists, switch to it.
 
 ## Per task
 

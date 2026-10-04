@@ -14,10 +14,10 @@ for the feature is written in this skill.
    related specs, ADRs in `docs/decisions/`, `docs/next-steps.md`. For a
    broad code search dispatch `devflow:explorer`.
 2. **Understand.** Write back in a few lines what you take the goal,
-   constraints and success criteria to be, separating what the user said
-   from what you assume. Ask the questions whose answers change the
-   design, one topic at a time. Do not ask what the code or docs already
-   answer.
+   constraints and success criteria to be. Where information is missing,
+   ask instead of assuming: one topic at a time, each question with
+   options and a recommendation. Do not ask what the code or docs
+   already answer.
 3. **Choose.** Where a real choice exists, offer two or three approaches
    with trade-offs and a recommendation. Leave out anything the goal does
    not need.
@@ -26,8 +26,8 @@ for the feature is written in this skill.
    the first.
 5. **Check.** Reread it once: no placeholders, no contradictions, no
    requirement that can be read two ways.
-6. **Hand over.** Ask the user to review the file, and name the points
-   where you made a call they did not explicitly make. Stop here.
+6. **Hand over.** Ask the user to review the file. If any point in it
+   was not explicitly decided by the user, name it. Stop here.
 7. **Approve.** Set `Status: approved` only when the user says so. Apply
    requested changes and ask again.
 

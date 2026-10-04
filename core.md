@@ -14,6 +14,18 @@ all development work. The project's `CLAUDE.md` takes precedence.
 - Bugs and unexpected behaviour: `/devflow:debug`.
 - A project without the docs layout below: offer `/devflow:init`.
 
+## Missing information
+
+- When something needed for a decision is not in the request, the code
+  or the docs, ask; do not assume. Present options with a recommendation.
+- What the code or docs can answer is looked up, not asked.
+
+## Branches
+
+- Feature work happens on a feature branch created from the default
+  branch. Do not use worktrees.
+- Documentation-only changes may go directly on the default branch.
+
 ## Docs layout
 
 ```

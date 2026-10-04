@@ -19,7 +19,7 @@ phases are skills loaded on demand. `init` adds only a pointer block to
 
 ## Consequences
 
-- Every session pays the context cost of `core.md`; a test caps it at
-  60 lines.
+- Every session pays the context cost of `core.md`; a test caps its
+  length.
 - A rule change in the plugin reaches all projects at once.
 - Project-specific rules stay in `CLAUDE.md` and override the core.

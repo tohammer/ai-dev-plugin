@@ -37,8 +37,8 @@ hook_fails_without_core() {
     ! CLAUDE_PLUGIN_ROOT=/nonexistent hooks/session-start
 }
 check "hook fails without core.md" hook_fails_without_core
-core_is_short() { [ "$(wc -l < core.md)" -le 60 ]; }
-check "core.md is at most 60 lines" core_is_short
+core_is_short() { [ "$(wc -l < core.md)" -le 70 ]; }
+check "core.md is at most 70 lines" core_is_short
 
 # Skills
 for name in init spec implement review debug wrapup; do
