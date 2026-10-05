@@ -34,9 +34,9 @@ Trivial changes are done directly. A non-trivial feature goes through:
 
 | Step | Command | What happens |
 |---|---|---|
-| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list. You review it; only your approval sets `Status: approved`, and implementation then starts without further prompting. |
+| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list; for a larger UI topic it offers a static HTML mockup first, kept next to the spec. You review it; only your approval sets `Status: approved`, and implementation then starts without further prompting. |
 | 2 | `/devflow:implement` | Each task is briefed to an implementer subagent, checked and ticked off. Refuses a spec that is not approved. |
-| 3 | `/devflow:review` | Reviewer subagents examine the change. Findings are verified, then fixed or deferred to the backlog. |
+| 3 | `/devflow:review` | Reviewer subagents examine the change. Findings are verified, then fixed or deferred to the backlog. UI changes without automated test coverage are tested manually, by Claude where it can, otherwise by you with steps it provides. |
 | 4 | `/devflow:wrapup` | README, architecture, ADRs, backlog and next-steps are brought in line with the change. |
 
 Also available at any time:
@@ -65,6 +65,7 @@ did not start from a spec.
 README.md                          user-side instructions
 docs/architecture.md               the system as it is now
 docs/specs/YYYY-MM-DD-<topic>.md   Status: draft | approved | implemented
+                                   (plus -mockup.html for UI topics)
 docs/decisions/NNNN-<title>.md     ADRs: Context / Decision / Consequences
 docs/audits/YYYY-MM-DD.md          audit reports, snapshots
 docs/backlog.md                    open points only

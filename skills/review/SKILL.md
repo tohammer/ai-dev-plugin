@@ -19,17 +19,24 @@ description: Review a change against its spec and for defects using reviewer sub
 3. **Verify.** Check every finding against the code before acting on
    it. Drop those that do not hold, and say so. A reviewer's finding is
    a lead, not a fact.
-4. **Decide.** Present the confirmed findings ordered by severity.
+4. **UI check.** If the change touches the UI and automated tests
+   (component, end-to-end, screenshot) do not cover it, test it manually
+   before the review is complete. Drive the app yourself where possible
+   (browser automation, screenshots, running it) and record what you
+   checked. Otherwise give the user exact steps and wait for the result.
+   A failed check is a finding.
+5. **Decide.** Present the confirmed findings ordered by severity.
    Fix the clear defects. Where fixing is a judgment call (cost, scope,
    taste), the user decides between fixing and deferring.
-5. **Fix.** Small fixes yourself; larger ones through
+6. **Fix.** Small fixes yourself; larger ones through
    `devflow:implementer` with a brief. Re-run the checks with
    `devflow:verifier`.
-6. **Defer.** Every confirmed finding that is not fixed goes into
+7. **Defer.** Every confirmed finding that is not fixed goes into
    `docs/backlog.md` with its origin (which review, which spec), the
    reason it was deferred and when to revisit it.
 
 ## Reporting
 
-Tell the user what was found, what was fixed, what was deferred, and
-what the review did not cover.
+Tell the user what was found, what was fixed, what was deferred, which
+UI paths were tested manually and how, and what the review did not
+cover.
