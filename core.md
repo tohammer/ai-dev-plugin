@@ -11,7 +11,8 @@ all development work. The project's `CLAUDE.md` takes precedence.
 - A change is non-trivial when it adds a component, changes an interface
   or data format other code depends on, or cannot be described completely
   in two sentences. When unsure, treat it as non-trivial.
-- Bugs and unexpected behaviour: `/devflow:debug`.
+- Bugs and unexpected behaviour: `/devflow:debug`. Review of a whole
+  project: `/devflow:audit`.
 - A project without the docs layout below: offer `/devflow:init`.
 
 ## Missing information
@@ -33,13 +34,13 @@ README.md                          user-side instructions
 docs/architecture.md               the system as it is now
 docs/specs/YYYY-MM-DD-<topic>.md   Status: draft | approved | implemented
 docs/decisions/NNNN-<title>.md     ADRs: Context / Decision / Consequences
+docs/audits/YYYY-MM-DD.md          audit reports, snapshots
 docs/backlog.md                    open points only
 docs/next-steps.md                 what to do next, nothing else
 ```
 
-- Docs change in the same commit as the code they describe. A change that
-  alters install steps, commands, flags or features is not done until the
-  README says so.
+- Docs go in the same commit as their code. A change to install steps,
+  commands, flags or features is not done until the README says so.
 - Every non-obvious technical decision gets an ADR with the next free
   number. Accepted ADRs are not relitigated; supersede them with a new one.
 - Only the user approves a spec. Code for a non-trivial feature starts
@@ -54,9 +55,8 @@ docs/next-steps.md                 what to do next, nothing else
 
 - Use a subagent when only the conclusion is needed or the work is
   separable. Do not spawn one for a small lookup.
-- Agents: `devflow:explorer`, `devflow:verifier`, `devflow:doc-checker`
-  (default haiku), `devflow:implementer`, `devflow:reviewer` (default
-  sonnet).
+- Agents (default model): haiku `devflow:explorer`, `devflow:verifier`,
+  `devflow:doc-checker`; sonnet `devflow:implementer`, `devflow:reviewer`.
 - Pick the cheapest model that can do the task well, and override the
   default with the Agent tool's `model` parameter: haiku for mechanical
   work, sonnet for ordinary implementation and review, opus for complex

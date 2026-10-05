@@ -11,6 +11,8 @@ to `docs/architecture.md` or an ADR.
    path (backlog: "Try `init` on the existing projects").
 3. Use the plugin on a real feature and collect what needs tuning in the
    backlog.
+4. Run `/devflow:audit` on a real project to exercise the reviewer
+   dispatch (backlog: "`audit` dispatch path is untested").
 
 ## Watch out for
 
