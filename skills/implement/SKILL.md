@@ -23,8 +23,9 @@ You orchestrate; subagents write the code.
 1. **Brief.** Write a self-contained brief for `devflow:implementer`:
    the goal, the files and interfaces involved, the acceptance criteria
    from the spec, the constraints that apply (ADRs, project rules, the
-   check commands), and what not to touch. The subagent sees nothing
-   else, so include the paths and facts it needs.
+   check commands), the mockup if the spec links one, and what not to
+   touch. The subagent sees nothing else, so include the paths and facts
+   it needs.
 2. **Pick the model.** Default is sonnet. Pass `model: "opus"` for tasks
    involving concurrency, security, cross-module interfaces or subtle
    logic; `model: "haiku"` for mechanical ones (renames, fixtures,

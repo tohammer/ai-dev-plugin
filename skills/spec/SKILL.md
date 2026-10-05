@@ -20,7 +20,7 @@ for the feature is written in this skill.
    already answer.
 3. **Choose.** Where a real choice exists, offer two or three approaches
    with trade-offs and a recommendation. Leave out anything the goal does
-   not need.
+   not need. For a larger UI topic, offer a mockup (see Mockups).
 4. **Write.** Fill the spec template below with `Status: draft`. If one
    spec would cover several independent subsystems, split it and write
    the first.
@@ -38,6 +38,21 @@ The spec ends with ordered tasks, each a checkbox with acceptance
 criteria. A task is sized for one subagent: it names what to build and
 how to tell it is done, not the code. Order them so each leaves the
 project working. Mark tasks that can run in parallel.
+
+## Mockups
+
+Offer a mockup once, as its own question, when the topic is a new
+screen or flow or a significant layout change and a question would be
+clearer shown than described. A UI topic alone is not reason enough;
+small questions can be answered with an ASCII sketch in the terminal.
+
+On a yes, write one self-contained static HTML file: two or three
+variants side by side, placeholder data, no backend, no external
+requests. Publish it as a private page if the session has an Artifact
+tool; otherwise give the user the file path to open in a browser. The
+user answers in the terminal; iterate until a direction is chosen. Keep
+the chosen version as `docs/specs/YYYY-MM-DD-<topic>-mockup.html` and
+link it from the spec's Design section.
 
 ## Decisions
 
@@ -65,7 +80,7 @@ What is in, and what is deliberately out.
 ## Design
 
 Components, their responsibilities and how they connect. Interfaces and
-data formats that other code will depend on.
+data formats that other code will depend on. The mockup, if there is one.
 
 ## Error handling
 
@@ -73,7 +88,8 @@ What can go wrong and what happens then.
 
 ## Testing
 
-How the feature is verified: automated tests, manual checks.
+How the feature is verified: automated tests, manual checks (including
+UI paths the automated tests do not cover).
 
 ## Tasks
 
