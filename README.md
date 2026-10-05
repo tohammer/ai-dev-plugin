@@ -45,6 +45,11 @@ Also available at any time:
   proposes how to map the current docs and moves nothing without your
   approval.
 - `/devflow:debug` finds and fixes the cause of a bug.
+- `/devflow:audit` reviews a whole existing project across code, security,
+  tests, build and CI, dependencies, documentation, configuration and
+  operations, and repository hygiene. It fixes nothing: it writes a report
+  to `docs/audits/YYYY-MM-DD.md` and adds the findings you confirm to the
+  backlog (proposed: severity medium and above).
 
 Two rules apply throughout: when information needed for a decision is
 missing, Claude asks with options and a recommendation instead of
@@ -61,6 +66,7 @@ README.md                          user-side instructions
 docs/architecture.md               the system as it is now
 docs/specs/YYYY-MM-DD-<topic>.md   Status: draft | approved | implemented
 docs/decisions/NNNN-<title>.md     ADRs: Context / Decision / Consequences
+docs/audits/YYYY-MM-DD.md          audit reports, snapshots
 docs/backlog.md                    open points only
 docs/next-steps.md                 what to do next, nothing else
 ```
@@ -76,7 +82,7 @@ docs/next-steps.md                 what to do next, nothing else
 | `devflow:verifier` | haiku | run build, test and lint; report failures |
 | `devflow:doc-checker` | haiku | find stale or missing docs for a change |
 | `devflow:implementer` | sonnet | implement one briefed task with tests |
-| `devflow:reviewer` | sonnet | review a diff, report findings with evidence |
+| `devflow:reviewer` | sonnet | review a diff or, for an audit, an area and aspect; report findings with evidence |
 
 The defaults are a starting point. The orchestrator picks the cheapest
 model that can do each task well and uses opus for complex ones.
