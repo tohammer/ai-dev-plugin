@@ -99,3 +99,7 @@ claude plugin validate .   manifest check
 ```
 
 Design and reasoning: `docs/architecture.md`, `docs/decisions/`.
+
+## License
+
+MIT, see `LICENSE`.
