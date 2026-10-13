@@ -29,7 +29,8 @@ description: Find and fix the cause of a bug, test failure or unexpected behavio
 
 After two fixes that did not hold, stop patching. The model of the
 problem is wrong: go back to step 2, or question the design with the
-user.
+user: what the failed fixes show, the options with their pros and cons,
+and your recommendation with the reason it is better.
 
 ## Afterwards
 

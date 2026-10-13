@@ -27,7 +27,9 @@ description: Review a change against its spec and for defects using reviewer sub
    A failed check is a finding.
 5. **Decide.** Present the confirmed findings ordered by severity.
    Fix the clear defects. Where fixing is a judgment call (cost, scope,
-   taste), the user decides between fixing and deferring.
+   taste), the user decides between fixing and deferring: for each,
+   explain the finding briefly, give the pros and cons of fixing now
+   and of deferring, and recommend one with the reason it is better.
 6. **Fix.** Small fixes yourself; larger ones through
    `devflow:implementer` with a brief. Re-run the checks with
    `devflow:verifier`.

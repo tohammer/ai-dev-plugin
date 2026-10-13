@@ -52,9 +52,11 @@ Also available at any time:
   backlog (proposed: severity medium and above).
 
 Two rules apply throughout: when information needed for a decision is
-missing, Claude asks with options and a recommendation instead of
-assuming; and feature work happens on a feature branch (no worktrees),
-while documentation-only changes may go directly on the default branch.
+missing, Claude asks instead of assuming, and every question comes with
+a brief explanation, the pros and cons of each option and a
+recommendation with its reason; and feature work happens on a feature
+branch (no worktrees), while documentation-only changes may go directly
+on the default branch.
 
 Each command can be used on its own; you can review or wrap up work that
 did not start from a spec.

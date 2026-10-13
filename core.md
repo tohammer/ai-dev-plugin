@@ -11,15 +11,15 @@ all development work. The project's `CLAUDE.md` takes precedence.
 - A change is non-trivial when it adds a component, changes an interface
   or data format other code depends on, or cannot be described completely
   in two sentences. When unsure, treat it as non-trivial.
-- Bugs and unexpected behaviour: `/devflow:debug`. Review of a whole
-  project: `/devflow:audit`.
-- A project without the docs layout below: offer `/devflow:init`.
+- Bugs and unexpected behaviour: `/devflow:debug`. Whole-project review:
+  `/devflow:audit`. Without the docs layout below: offer `/devflow:init`.
 
-## Missing information
+## Questions to the user
 
 - When something needed for a decision is not in the request, the code
-  or the docs, ask; do not assume. Present options with a recommendation.
-- What the code or docs can answer is looked up, not asked.
+  or the docs, ask; do not assume. What they can answer is looked up.
+- Every question or choice for the user: a brief explanation, pros and
+  cons per option if applicable, a recommendation and why it is better.
 
 ## Branches
 

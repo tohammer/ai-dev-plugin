@@ -6,7 +6,9 @@ description: Turn an idea for a non-trivial feature into a written spec with a t
 # Spec
 
 Produce `docs/specs/YYYY-MM-DD-<topic>.md` and get it reviewed. No code
-for the feature is written in this skill.
+for the feature is written in this skill. Every question or choice put
+to the user gets a brief explanation, each option's pros and cons where
+they apply, and a recommendation with the reason it is better.
 
 ## Steps
 
@@ -14,13 +16,11 @@ for the feature is written in this skill.
    related specs, ADRs in `docs/decisions/`, `docs/next-steps.md`. For a
    broad code search dispatch `devflow:explorer`.
 2. **Understand.** Write back in a few lines what you take the goal,
-   constraints and success criteria to be. Where information is missing,
-   ask instead of assuming: one topic at a time, each question with
-   options and a recommendation. Do not ask what the code or docs
-   already answer.
-3. **Choose.** Where a real choice exists, offer two or three approaches
-   with trade-offs and a recommendation. Leave out anything the goal does
-   not need. For a larger UI topic, offer a mockup (see Mockups).
+   constraints and success criteria to be. Ask for what is missing, one
+   topic at a time; never assume it, never ask what code or docs answer.
+3. **Choose.** Where a real choice exists, offer two or three approaches.
+   Leave out anything the goal does not need. For a larger UI topic,
+   offer a mockup (see Mockups).
 4. **Write.** Fill the spec template below with `Status: draft`. If one
    spec would cover several independent subsystems, split it and write
    the first.

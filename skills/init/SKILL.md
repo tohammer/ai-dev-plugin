@@ -34,7 +34,8 @@ docs/next-steps.md
 
    Old plan files and docs that fit no canonical slot (runbooks,
    analysis, guides) stay where they are. When two files compete for one
-   canonical path, show both and ask; do not merge on your own.
+   canonical path, show both and ask, with the pros and cons of each
+   option and a recommendation with its reason; do not merge on your own.
 4. **Wait for approval.** Move, split or rewrite nothing before the user
    approves the table. Then use `git mv` for moves, add `Status:
    implemented` to moved specs whose work is finished, and fix links

@@ -47,7 +47,7 @@ Each aspect below appears in the report.
      correctness-critical areas. Security: one, on `model: "opus"`.
    - Other aspects: one reviewer each, default model; on a small
      project aspects 4-8 may share one.
-   - Over about 15 dispatches: propose to the user what to cover first.
+   - Over about 15 dispatches: propose what to cover first, and why.
 4. **Verify.** Check every finding against the code and drop those that
    do not hold. A finding is a lead, not a fact.
 5. **Rate.** Severity per confirmed finding:
@@ -81,11 +81,11 @@ Each aspect below appears in the report.
    afterwards edit it only to record backlog links. Never quote a
    secret's value; give its location and kind.
 7. **Backlog.** Group related findings into actionable items. Propose
-   those of severity medium and above; the user confirms, removes or
-   adds. Write the confirmed items to the backlog (file or directory
-   form) with origin `audit YYYY-MM-DD, findings A-n`, the reason and
-   when to revisit. Mark in the report which findings went to which
-   item. If the user confirms none, the report stands.
+   those of severity medium and above, each with pros, cons and a
+   reasoned recommendation; the user confirms, removes or adds. Write
+   the confirmed items to the backlog with origin `audit YYYY-MM-DD,
+   findings A-n`, the reason and when to revisit. Mark in the report
+   which findings went where. With none confirmed, the report stands.
 8. **Hand over.** Summarise state per aspect, counts by severity, what
    went to the backlog and what was not covered. Commit only if asked.
 

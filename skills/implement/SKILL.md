@@ -43,7 +43,9 @@ You orchestrate; subagents write the code.
 - A task that fails twice in a subagent: do it yourself or re-run it on
   a stronger model with a brief that names what went wrong.
 - A task that shows the spec is wrong or incomplete: stop and take the
-  question to the user. Update the spec before continuing.
+  question to the user: what is wrong, the options with their pros and
+  cons, and your recommendation with the reason it is better. Update
+  the spec before continuing.
 - Work discovered that is outside the spec: add it to `docs/backlog.md`,
   do not build it.
 
