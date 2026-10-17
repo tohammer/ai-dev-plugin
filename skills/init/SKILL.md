@@ -9,6 +9,7 @@ Target layout:
 
 ```
 README.md
+docs/user/            (created by devflow:userdocs when needed)
 docs/architecture.md
 docs/specs/
 docs/decisions/
@@ -42,7 +43,8 @@ docs/next-steps.md
    that pointed at the old paths.
 5. **Scaffold.** Create each missing canonical file with the starting
    content below, filled with what you know about the project. Never overwrite an
-   existing file. Create `README.md` if absent.
+   existing file. If `README.md` is absent, load `devflow:userdocs`
+   and write it with that skill's README structure.
 6. **CLAUDE.md.** Add this block (create the file if absent, skip if the
    block is already there), and remove rules it now duplicates only with
    the user's approval:

@@ -41,13 +41,15 @@ core_is_short() { [ "$(wc -l < core.md)" -le 70 ]; }
 check "core.md is at most 70 lines" core_is_short
 
 # Skills
-for name in init spec implement review debug wrapup audit; do
+for name in init spec implement review debug wrapup audit userdocs; do
     f="skills/$name/SKILL.md"
     check "$f exists" test -f "$f"
     check "$f has name" has_field "$f" name
     check "$f has description" has_field "$f" description
-    skill_is_short() { [ "$(wc -l < "$f")" -le 100 ]; }
-    check "$f is at most 100 lines" skill_is_short
+    max=100
+    [ "$name" = userdocs ] && max=150 # mostly reference material, ADR 0007
+    skill_is_short() { [ "$(wc -l < "$f")" -le "$max" ]; }
+    check "$f is at most $max lines" skill_is_short
 done
 
 # Agents
