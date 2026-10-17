@@ -13,7 +13,7 @@ orchestrating model and agent definitions for subagents. The only executable par
 |---|---|---|
 | `core.md` | General instructions present in every session: workflow, docs layout, subagent and model rules, verification | — |
 | `hooks/` | SessionStart hook that prints `core.md` into the session | `core.md` |
-| `skills/` | One skill per phase: init, spec, implement, review, debug, wrapup; `audit` (whole-project review) is not a phase of the feature workflow. Loaded on demand. `spec` and `init` embed the document starting content | agents |
+| `skills/` | One skill per phase: init, spec, implement, review, debug, wrapup; `audit` (whole-project review) and `userdocs` (user-facing docs) are not phases of the feature workflow. Loaded on demand. `spec` and `init` embed the document starting content | agents |
 | `agents/` | Subagent definitions with a default model each: explorer, verifier, doc-checker, implementer, reviewer | — |
 | `tests/run.sh` | Structure checks: hook output, frontmatter, size limits, references | all of the above |
 

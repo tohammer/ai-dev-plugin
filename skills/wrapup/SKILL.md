@@ -10,7 +10,10 @@ description: Bring the documentation in line with a finished change - README, ar
 1. **Check.** Dispatch `devflow:doc-checker` with the diff range and the
    spec path. For a small change, check the docs yourself.
 2. **Update.** Apply what is needed:
-   - `README.md`: install steps, commands, flags, features.
+   - `README.md` and `docs/user/`: install steps, commands, flags,
+     features. For a new section or a restructuring, load
+     `devflow:userdocs` and follow it; a one-line update is done
+     directly.
    - `docs/architecture.md`: changed components and connections, and
      lessons worth keeping.
    - `docs/decisions/`: an ADR for each non-obvious decision that has

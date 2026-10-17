@@ -13,6 +13,9 @@ to `docs/architecture.md` or an ADR.
    backlog.
 4. Run `/devflow:audit` on a real project to exercise the reviewer
    dispatch (backlog: "`audit` dispatch path is untested").
+5. Run `/devflow:userdocs` on a long README (emacs-quarry,
+   ai-dev-environment) to exercise the move to `docs/user/`
+   (backlog: "`userdocs` move paths are untested").
 
 ## Watch out for
 

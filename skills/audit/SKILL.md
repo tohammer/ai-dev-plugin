@@ -23,7 +23,7 @@ Each aspect below appears in the report.
 5. **Dependencies.** Outdated or unmaintained packages, known
    vulnerabilities (run the ecosystem's audit tool if installed),
    lockfile present and used, unused dependencies, licences.
-6. **Documentation.** README install and usage match reality;
+6. **Documentation.** README and `docs/user/` install and usage match reality;
    architecture, ADRs, specs (status, ticked tasks), backlog and
    next-steps match the code; devflow layout present.
 7. **Configuration and operations.** Configuration handling, logging,

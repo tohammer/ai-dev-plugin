@@ -1,7 +1,6 @@
 # devflow
 
-You work in a project that uses the devflow plugin. These rules apply to
-all development work. The project's `CLAUDE.md` takes precedence.
+Rules for all development work; project `CLAUDE.md` takes precedence.
 
 ## Workflow
 
@@ -12,7 +11,8 @@ all development work. The project's `CLAUDE.md` takes precedence.
   or data format other code depends on, or cannot be described completely
   in two sentences. When unsure, treat it as non-trivial.
 - Bugs and unexpected behaviour: `/devflow:debug`. Whole-project review:
-  `/devflow:audit`. Without the docs layout below: offer `/devflow:init`.
+  `/devflow:audit`. README and user docs: `/devflow:userdocs`. Without
+  the docs layout below: offer `/devflow:init`.
 
 ## Questions to the user
 
@@ -23,14 +23,14 @@ all development work. The project's `CLAUDE.md` takes precedence.
 
 ## Branches
 
-- Feature work happens on a feature branch created from the default
-  branch. Do not use worktrees.
+- Feature work: feature branch from the default branch; no worktrees.
 - Documentation-only changes may go directly on the default branch.
 
 ## Docs layout
 
 ```
 README.md                          user-side instructions
+docs/user/<topic>.md               user docs beyond the README
 docs/architecture.md               the system as it is now
 docs/specs/YYYY-MM-DD-<topic>.md   Status: draft | approved | implemented
 docs/decisions/NNNN-<title>.md     ADRs: Context / Decision / Consequences

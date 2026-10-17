@@ -1,70 +1,89 @@
 # devflow
 
-A lightweight development-workflow plugin for Claude Code. It guides work
-from idea to spec, implementation, review and wrap-up, runs the bulk of
-the work in subagents on cheaper models, and keeps one documentation
-layout across projects.
+A development-workflow plugin for Claude Code: it takes a feature from
+spec to implementation, review and wrap-up, runs most of the work in
+subagents on cheaper models, and keeps one documentation layout across
+projects.
 
-## Install
+## Status
 
-From a local checkout:
+Version 0.1.0, used on its own development.
+
+| Install method | Status |
+|---|---|
+| `--plugin-dir` for one session | tested |
+| Local marketplace | untested |
+
+## Quick start
+
+Start Claude Code with the plugin, in the project you want to work on:
 
 ```
-claude plugin marketplace add /path/to/ai-dev-plugin
+claude --plugin-dir <path-to-ai-dev-plugin>
+```
+
+Then, in the session:
+
+```
+/devflow:init
+/devflow:spec <what you want to build>
+```
+
+`init` sets up the docs layout; `spec` writes a spec for you to review.
+
+## Installation
+
+### Local marketplace
+
+```
+claude plugin marketplace add <path-to-ai-dev-plugin>
 claude plugin install devflow@devflow-local
 ```
 
-To try it for one session without installing:
+### Alongside superpowers
+
+devflow replaces superpowers. With both enabled, both inject a workflow
+at session start and superpowers' wording wins. Disable it:
 
 ```
-claude --plugin-dir /path/to/ai-dev-plugin
+claude plugin disable superpowers
 ```
 
-devflow replaces superpowers; disable that plugin to avoid two competing
-workflows (`claude plugin disable superpowers`).
+## Usage
 
-## How it works
-
-Every session starts with a short set of general instructions
-(`core.md`, injected by a SessionStart hook): the workflow, the docs
-layout, how to use subagents and models, and the verification rule. The
-phases themselves are skills that load on demand.
-
-Trivial changes are done directly. A non-trivial feature goes through:
+Trivial changes are done directly. A non-trivial feature (a new
+component, a changed interface, or anything not describable in two
+sentences) goes through four commands:
 
 | Step | Command | What happens |
 |---|---|---|
-| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list; for a larger UI topic it offers a static HTML mockup first, kept next to the spec. You review it; only your approval sets `Status: approved`, and implementation then starts without further prompting. |
+| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list. For a larger UI topic it offers a static HTML mockup first. Only your approval sets `Status: approved`; implementation then starts without further prompting. |
 | 2 | `/devflow:implement` | Each task is briefed to an implementer subagent, checked and ticked off. Refuses a spec that is not approved. |
-| 3 | `/devflow:review` | Reviewer subagents examine the change. Findings are verified, then fixed or deferred to the backlog. UI changes without automated test coverage are tested manually, by Claude where it can, otherwise by you with steps it provides. |
-| 4 | `/devflow:wrapup` | README, architecture, ADRs, backlog and next-steps are brought in line with the change. |
+| 3 | `/devflow:review` | Reviewer subagents examine the change; findings are verified, then fixed or deferred to the backlog. UI changes without automated tests are tested by hand, by Claude where it can, otherwise by you with the steps it gives. |
+| 4 | `/devflow:wrapup` | README, user docs, architecture, ADRs, backlog and next-steps are brought in line with the change. |
 
-Also available at any time:
+Commands for any time, also on work that did not start from a spec:
 
-- `/devflow:init` sets up the docs layout. In an existing project it
-  proposes how to map the current docs and moves nothing without your
-  approval.
-- `/devflow:debug` finds and fixes the cause of a bug.
-- `/devflow:audit` reviews a whole existing project across code, security,
-  tests, build and CI, dependencies, documentation, configuration and
-  operations, and repository hygiene. It fixes nothing: it writes a report
-  to `docs/audits/YYYY-MM-DD.md` and adds the findings you confirm to the
-  backlog (proposed: severity medium and above).
+| Command | What happens |
+|---|---|
+| `/devflow:init` | Sets up the docs layout. In an existing project it proposes how to map the current docs and moves nothing without your approval. |
+| `/devflow:debug` | Finds the cause of a bug with evidence, fixes it and adds a regression test. |
+| `/devflow:audit` | Reviews a whole project: code, security, tests, build and CI, dependencies, docs, configuration, repository hygiene. Writes `docs/audits/YYYY-MM-DD.md`, fixes nothing, and adds the findings you confirm to the backlog. |
+| `/devflow:userdocs` | Writes or reworks the README and user docs in `docs/user/` to a fixed structure, and checks their commands and options against the code. |
 
-Two rules apply throughout: when information needed for a decision is
-missing, Claude asks instead of assuming, and every question comes with
-a brief explanation, the pros and cons of each option and a
-recommendation with its reason; and feature work happens on a feature
-branch (no worktrees), while documentation-only changes may go directly
-on the default branch.
+Throughout, Claude:
 
-Each command can be used on its own; you can review or wrap up work that
-did not start from a spec.
+- asks when information for a decision is missing, and gives each
+  question a brief explanation, the pros and cons of each option and a
+  recommendation with its reason;
+- does feature work on a feature branch (no worktrees); documentation-only
+  changes may go on the default branch.
 
-## Docs layout
+### Docs layout
 
 ```
 README.md                          user-side instructions
+docs/user/<topic>.md               user docs beyond the README
 docs/architecture.md               the system as it is now
 docs/specs/YYYY-MM-DD-<topic>.md   Status: draft | approved | implemented
                                    (plus -mockup.html for UI topics)
@@ -74,33 +93,36 @@ docs/backlog.md                    open points only
 docs/next-steps.md                 what to do next, nothing else
 ```
 
-`architecture.md` and `backlog.md` become directories
-(`docs/backlog/<area>.md`) when they grow large.
+Images for user docs go in `docs/user/images/`. `architecture.md` and
+`backlog.md` become directories (`docs/backlog/<area>.md`) when they
+grow large.
 
-## Agents and models
+## Configuration
+
+Rules in the project's `CLAUDE.md` take precedence over the plugin's.
+
+Each agent has a default model; the orchestrator overrides it per task,
+with opus for complex work:
 
 | Agent | Default model | Job |
 |---|---|---|
-| `devflow:explorer` | haiku | locate code, distil docs and logs |
-| `devflow:verifier` | haiku | run build, test and lint; report failures |
-| `devflow:doc-checker` | haiku | find stale or missing docs for a change |
-| `devflow:implementer` | sonnet | implement one briefed task with tests |
-| `devflow:reviewer` | sonnet | review a diff or, for an audit, an area and aspect; report findings with evidence |
+| `devflow:explorer` | haiku | Locate code, distil docs and logs. |
+| `devflow:verifier` | haiku | Run build, test and lint; report failures. |
+| `devflow:doc-checker` | haiku | Find stale or missing docs for a change. |
+| `devflow:implementer` | sonnet | Implement one briefed task with tests. |
+| `devflow:reviewer` | sonnet | Review a diff, or an area and aspect for an audit; report findings with evidence. |
 
-The defaults are a starting point. The orchestrator picks the cheapest
-model that can do each task well and uses opus for complex ones.
-
-Project-specific rules belong in the project's `CLAUDE.md` and take
-precedence over the plugin's general instructions.
-
-## Developing the plugin
+## Development
 
 ```
-tests/run.sh               structure checks
-claude plugin validate .   manifest check
+tests/run.sh
+claude plugin validate .
 ```
 
-Design and reasoning: `docs/architecture.md`, `docs/decisions/`.
+`tests/run.sh` checks structure (hook output, frontmatter, size limits,
+references); `validate` checks the manifests. Every session starts with
+`core.md`, printed by a SessionStart hook; the commands are skills that
+load on demand. Design: `docs/architecture.md`, `docs/decisions/`.
 
 ## License
 

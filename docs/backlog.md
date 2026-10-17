@@ -43,3 +43,10 @@ the audit spec.
 whole project". Competition looks unlikely since `review`'s triggers are
 all about changes. Origin: review of the audit spec. Revisit if a
 whole-project request ever loads `review`.
+
+## `userdocs` move paths are untested
+
+The smoke test covered a small CLI only: no README past the soft limit
+of 500 lines, no feature area moved to `docs/user/<topic>.md`, no
+binary-only user guide, and no visuals made with VHS or asciinema.
+Origin: task 5 of the userdocs spec. Revisit on the first long README.
