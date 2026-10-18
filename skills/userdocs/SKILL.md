@@ -68,12 +68,12 @@ In this order; leave out what does not apply:
     the only place for design, ADR, spec and test references.
 11. License, then credits or disclaimers: last.
 
-Over about eight sections and read outside a host showing a heading
-outline (e.g. shipped with a release): contents list after the intro.
-
 ## Writing rules
 
 - Keep how-to, reference and explanation apart; link between them.
+- Any user doc over about eight sections read where no heading outline
+  is shown (a release file, a package registry page): contents list
+  after the intro.
 - How-to: title names the task; prerequisites first; numbered steps,
   one imperative action each; condition before instruction ("If you use
   X, run …"); optional steps start with "Optional:"; one method, the
