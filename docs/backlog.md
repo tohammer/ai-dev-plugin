@@ -4,12 +4,6 @@ Open points only. Delete an item when it is done; git keeps the history.
 Deferred review findings name their origin, the reason and when to
 revisit.
 
-## Try `init` on the existing projects
-
-The adopt path (mapping existing docs, proposing moves) has only been
-exercised on an empty repo. Run it on a few existing projects
-and adjust the mapping examples in `skills/init`.
-
 ## Orchestrator skips the cheap agents on small changes
 
 In the smoke test the orchestrator ran the checks and the doc check
