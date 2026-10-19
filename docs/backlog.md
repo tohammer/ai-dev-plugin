@@ -9,7 +9,9 @@ revisit.
 In the smoke test the orchestrator ran the checks and the doc check
 itself instead of dispatching `verifier` and `doc-checker`. Acceptable
 for a tiny change; watch whether it also happens on real features, and
-if so make the skills firmer.
+if so make the skills firmer. Seen again in the `test` smoke test
+(2026-10-19): the orchestrator wrote and ran the tests itself instead of
+dispatching `implementer` and `verifier`.
 
 ## `wrapup` left next-steps without a real next item
 
@@ -39,26 +41,6 @@ of 500 lines, no feature area moved to `docs/user/<topic>.md`, no
 binary-only user guide, and no visuals made with VHS or asciinema.
 Origin: task 5 of the userdocs spec. Revisit on the first long README.
 
-## Record the project's check commands in one place
-
-`verifier`, `implementer`, `review` and `wrapup` guess build, test,
-lint, format and typecheck commands from `justfile`, `Makefile` or the
-manifest. `init` should record them in a fixed place (e.g. a `## Checks`
-section in `CLAUDE.md`) that every skill and agent reads. Prerequisite
-for the testing and `ship` items. Origin: workflow gap analysis
-2026-10-18. Suggested to spec together with the testing item.
-
-## Testing standard and a `test` skill
-
-Testing is one line in `implementer` ("test-first where testable") and
-a free-text section in the spec. Add: short testing rules for
-`implementer` (behaviour not implementation, observe the failing test
-and report it, no mock-only assertions, no snapshots instead of
-assertions, never skip or weaken a test to get green, flaky is a
-defect); acceptance criteria per spec task that name the proving tests;
-a `/devflow:test` skill to add or repair tests for existing code (test
-level choice, characterization tests for legacy code, flaky-test
-repair). Origin: workflow gap analysis 2026-10-18.
 
 ## `ship` skill for finishing a branch
 
@@ -74,7 +56,8 @@ analysis 2026-10-18.
 Refactors fit neither "trivial" nor the full spec flow. Steps: check
 coverage of the touched code and add characterization tests first,
 small steps with checks green after each, no behaviour change mixed in,
-ADR on structural change. Origin: workflow gap analysis 2026-10-18.
+ADR on structural change. Reuse the characterization step of
+`/devflow:test`. Origin: workflow gap analysis 2026-10-18.
 
 ## Dependency additions and upgrades
 

@@ -12,7 +12,7 @@ Version 0.1.0, used on its own development.
 | Install method | Status |
 |---|---|
 | `--plugin-dir` for one session | tested |
-| Local marketplace | untested |
+| Local marketplace | tested |
 
 ## Quick start
 
@@ -29,7 +29,8 @@ Then, in the session:
 /devflow:spec <what you want to build>
 ```
 
-`init` sets up the docs layout; `spec` writes a spec for you to review.
+`init` sets up the docs layout and records the check commands; `spec`
+writes a spec for you to review.
 
 ## Installation
 
@@ -66,8 +67,9 @@ Commands for any time, also on work that did not start from a spec:
 
 | Command | What happens |
 |---|---|
-| `/devflow:init` | Sets up the docs layout. In an existing project it proposes how to map the current docs and moves nothing without your approval. |
+| `/devflow:init` | Sets up the docs layout and records the project's check commands. In an existing project it proposes how to map the current docs and moves nothing without your approval. |
 | `/devflow:debug` | Finds the cause of a bug with evidence, fixes it and adds a regression test. |
+| `/devflow:test` | Adds or repairs tests for existing code: picks the test level, pins current behaviour before a change, fixes flaky tests at the cause. |
 | `/devflow:audit` | Reviews a whole project: code, security, tests, build and CI, dependencies, docs, configuration, repository hygiene. Writes `docs/audits/YYYY-MM-DD.md`, fixes nothing, and adds the findings you confirm to the backlog. |
 | `/devflow:userdocs` | Writes or reworks the README and user docs in `docs/user/` to a fixed structure, and checks their commands and options against the code. |
 
@@ -101,6 +103,33 @@ grow large.
 
 Rules in the project's `CLAUDE.md` take precedence over the plugin's.
 
+### Check commands
+
+`/devflow:init` records the commands every skill and agent runs, in a
+`## Checks` section of `CLAUDE.md`. Edit it by hand when they change:
+
+```markdown
+## Checks
+
+Run from the repository root.
+
+- build: `cargo build`
+- test: `cargo test`
+- test one: `cargo test <name>`
+- lint: `cargo clippy -- -D warnings`
+- format: `cargo fmt --check`
+- typecheck: none
+```
+
+Kinds stay in this order; `none` marks a kind the project lacks; more
+kinds (`e2e`, `coverage`) may follow. In a project with an `AGENTS.md`,
+`init` makes `CLAUDE.md` import it (`@AGENTS.md`) and writes the
+section into `AGENTS.md`, so other coding agents get the commands too.
+Without the section, skills determine the commands from the project's
+files, say which they used and offer to record them with `/devflow:init`.
+
+### Agents and models
+
 Each agent has a default model; the orchestrator overrides it per task,
 with opus for complex work:
 
@@ -120,7 +149,8 @@ claude plugin validate .
 ```
 
 `tests/run.sh` checks structure (hook output, frontmatter, size limits,
-references); `validate` checks the manifests. Every session starts with
+references, the testing rules' key phrase in all three copies);
+`validate` checks the manifests. Every session starts with
 `core.md`, printed by a SessionStart hook; the commands are skills that
 load on demand. Design: `docs/architecture.md`, `docs/decisions/`.
 

@@ -41,7 +41,7 @@ core_is_short() { [ "$(wc -l < core.md)" -le 70 ]; }
 check "core.md is at most 70 lines" core_is_short
 
 # Skills
-for name in init spec implement review debug wrapup audit userdocs; do
+for name in init spec implement review debug wrapup audit userdocs test; do
     f="skills/$name/SKILL.md"
     check "$f exists" test -f "$f"
     check "$f has name" has_field "$f" name
@@ -59,6 +59,12 @@ for name in explorer verifier doc-checker implementer reviewer; do
     for field in name description model; do
         check "$f has $field" has_field "$f" "$field"
     done
+done
+
+# Testing rule key phrase is kept in sync, ADR 0010
+for f in agents/implementer.md agents/reviewer.md skills/test/SKILL.md; do
+    check "$f has the testing key phrase" \
+        grep -qi 'never skip, delete or loosen a test' "$f"
 done
 
 # Skills must be self-contained: a session cannot read plugin files

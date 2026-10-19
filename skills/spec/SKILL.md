@@ -35,9 +35,9 @@ they apply, and a recommendation with the reason it is better.
 ## The task list
 
 The spec ends with ordered tasks, each a checkbox with acceptance
-criteria. A task is sized for one subagent: it names what to build and
-how to tell it is done, not the code. Order them so each leaves the
-project working. Mark tasks that can run in parallel.
+criteria. A task is sized for one subagent: it names what to build, how
+to tell it is done and the tests or manual check that show it, not the
+code. Order them so each leaves the project working; mark parallel ones.
 
 ## Mockups
 
@@ -94,7 +94,7 @@ UI paths the automated tests do not cover).
 ## Tasks
 
 Ordered. Each task is small enough for one subagent and names how to tell
-it is done.
+it is done and what shows it.
 
-- [ ] 1. <Task>. *Done when* <acceptance criteria>.
+- [ ] 1. <Task>. *Done when* <criteria>, *shown by* <tests or manual check>.
 ````

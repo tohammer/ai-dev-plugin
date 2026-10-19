@@ -23,9 +23,9 @@ Each aspect below appears in the report.
 5. **Dependencies.** Outdated or unmaintained packages, known
    vulnerabilities (run the ecosystem's audit tool if installed),
    lockfile present and used, unused dependencies, licences.
-6. **Documentation.** README and `docs/user/` install and usage match reality;
-   architecture, ADRs, specs (status, ticked tasks), backlog and
-   next-steps match the code; devflow layout present.
+6. **Documentation.** README and `docs/user/` match reality;
+   architecture, ADRs, specs (status, ticked tasks), backlog, next-steps
+   match the code; devflow layout present.
 7. **Configuration and operations.** Configuration handling, logging,
    error reporting, deployment scripts, where present.
 8. **Repository hygiene.** `.gitignore`, committed build artefacts or
@@ -35,14 +35,14 @@ Each aspect below appears in the report.
 
 1. **Scope.** Whole project unless arguments name paths or aspects.
    Record commit (`git rev-parse HEAD`) and scope. Without the devflow
-   layout, offer `/devflow:init`; if declined, step 7 lists the proposed
-   items in the report instead of writing them to a backlog.
-2. **Baseline.** `devflow:verifier` runs build, tests and linters.
-   `devflow:explorer` inventories code areas (from `docs/architecture.md`
-   if current, else the tree), CI files, dependency manifests, tests,
-   configuration and deployment files.
+   layout, offer `/devflow:init`; if declined, step 7 lists proposed
+   items in the report, not a backlog.
+2. **Baseline.** `devflow:verifier` runs `## Checks` (absent: determine
+   them, say which, offer `/devflow:init` to record them; stale or
+   duplicate: propose a fix). `devflow:explorer` inventories areas (`docs/architecture.md` if
+   current, else the tree), CI, manifests, tests, config, deploys.
 3. **Dispatch.** `devflow:reviewer` in parallel, briefed with the aspect,
-   area and files, baseline results and the aspect's checklist entry:
+   area, files, baseline results and the aspect's checklist entry:
    - Code: one reviewer per area; `model: "opus"` for security- or
      correctness-critical areas. Security: one, on `model: "opus"`.
    - Other aspects: one reviewer each, default model; on a small
@@ -86,15 +86,15 @@ Each aspect below appears in the report.
    the confirmed items to the backlog with origin `audit YYYY-MM-DD,
    findings A-n`, the reason and when to revisit. Mark in the report
    which findings went where. With none confirmed, the report stands.
-8. **Hand over.** Summarise state per aspect, counts by severity, what
-   went to the backlog and what was not covered. Commit only if asked.
+8. **Hand over.** Summarise state per aspect, counts by severity,
+   backlog items, what was not covered. Commit only if asked.
 
 ## Failures
 
 - Build, tests or linters cannot run: a finding under Build and CI or
-  Tests; aspects that depended on them say so.
+  Tests; aspects depending on them say so.
 - No CI, no tests, no docs: a finding, not a skipped aspect.
 - A reviewer fails or returns nothing usable: re-dispatch once, on a
-  stronger model if the first was weaker; else list it as not covered.
+  stronger model if weaker; else list it as not covered.
 - Dependency audit tool missing: assess from manifests, note the gap
   under "Not covered"; never install tools without asking.

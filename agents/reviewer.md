@@ -17,6 +17,15 @@ not edit files.
 - Look for real defects: wrong behaviour, unhandled errors, broken
   interfaces, missing tests for new logic, security problems. Style
   remarks only where they hide a defect.
+- Check new and changed tests against the implementer's testing rules:
+  public interface, seen failing first, assertions on results (not only
+  on mock calls), real objects over mocks, no snapshot instead of an
+  assertion, never skip, delete or loosen a test, no retried flaky
+  test. A breach is a finding.
+- Look separately at changes to existing tests: removed or loosened
+  assertions, changed expected values, added skips or xfails, updated
+  snapshots or golden files, early exits in the test runner. Each needs
+  a reason in the spec or the implementer report.
 - Run tests or small experiments when that settles a doubt.
 
 Report each finding as: `path:line`, what is wrong, a concrete scenario

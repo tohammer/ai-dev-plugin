@@ -10,9 +10,10 @@ Rules for all development work; project `CLAUDE.md` takes precedence.
 - A change is non-trivial when it adds a component, changes an interface
   or data format other code depends on, or cannot be described completely
   in two sentences. When unsure, treat it as non-trivial.
-- Bugs and unexpected behaviour: `/devflow:debug`. Whole-project review:
-  `/devflow:audit`. README and user docs: `/devflow:userdocs`. Without
-  the docs layout below: offer `/devflow:init`.
+- Bugs: `/devflow:debug`. Tests for existing code, flaky tests:
+  `/devflow:test`. Whole-project review: `/devflow:audit`. README and
+  user docs: `/devflow:userdocs`. No docs layout below or no
+  `## Checks`: offer `/devflow:init`.
 
 ## Questions to the user
 
@@ -45,9 +46,8 @@ docs/next-steps.md                 what to do next, nothing else
   number. Accepted ADRs are not relitigated; supersede them with a new one.
 - Only the user approves a spec. Code for a non-trivial feature starts
   from an approved spec; do not ask whether to start implementing it.
-- Finished items are deleted from backlog and next-steps; git keeps the
-  history. Review findings that are deliberately not fixed go into the
-  backlog with origin, reason and when to revisit.
+- Delete finished items from backlog and next-steps; git keeps them.
+  Unfixed findings go to the backlog with origin, reason, when to revisit.
 - `architecture.md` and `backlog.md` may be split into a directory of the
   same name (`docs/backlog/<area>.md`) when they grow; accept either form.
 

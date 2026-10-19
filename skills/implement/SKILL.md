@@ -23,9 +23,9 @@ You orchestrate; subagents write the code.
 1. **Brief.** Write a self-contained brief for `devflow:implementer`:
    the goal, the files and interfaces involved, the acceptance criteria
    from the spec, the constraints that apply (ADRs, project rules, the
-   check commands), the mockup if the spec links one, and what not to
-   touch. The subagent sees nothing else, so include the paths and facts
-   it needs.
+   commands from `## Checks`), the mockup if the spec links one, and
+   what not to touch. The subagent sees nothing else, so include the
+   paths and facts it needs.
 2. **Pick the model.** Default is sonnet. Pass `model: "opus"` for tasks
    involving concurrency, security, cross-module interfaces or subtle
    logic; `model: "haiku"` for mechanical ones (renames, fixtures,
@@ -33,8 +33,13 @@ You orchestrate; subagents write the code.
 3. **Dispatch.** Tasks the spec marks as independent may run in
    parallel, provided they do not edit the same files.
 4. **Check.** Read the diff yourself against the acceptance criteria.
-   Have `devflow:verifier` run the project's checks. A task is done when
-   the criteria hold and the checks pass, not when the subagent says so.
+   Have `devflow:verifier` run the checks from `## Checks`. Without
+   that section, determine the commands, tell the user which were used
+   and offer to record them with `/devflow:init`. A stale or duplicate section:
+   propose the fix to the user. Confirm that the tests the task names
+   exist and the report says they were seen failing first. A task is
+   done when the criteria hold and the checks pass, not when the
+   subagent says so.
 5. **Record.** Tick the checkbox in the spec. Commit if the user has
    asked for commits, with the checkbox in the same commit.
 

@@ -12,6 +12,10 @@ to `docs/architecture.md` or an ADR.
 3. Run `/devflow:userdocs` on a long README (emacs-quarry,
    ai-dev-environment) to exercise the move to `docs/user/`
    (backlog: "`userdocs` move paths are untested").
+4. Run `/devflow:init` on the projects set up earlier to add their
+   `## Checks` section.
+5. Next feature: spec `ship` (backlog), now that check commands are
+   recorded; consider `release` in the same spec.
 
 ## Watch out for
 

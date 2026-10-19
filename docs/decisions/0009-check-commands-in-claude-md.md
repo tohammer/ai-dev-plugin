@@ -5,9 +5,9 @@ Status: accepted
 
 ## Context
 
-`verifier`, `implementer`, `implement`, `review`, `debug`, `wrapup` and
-`audit` each need the project's build, test, lint, format and typecheck
-commands. Each guessed them from `justfile`, `Makefile` or the package
+`verifier`, `implementer`, `implement`, `review`, `debug`, `wrapup`,
+`audit` and the planned `test` skill each need the project's build,
+test, lint, format and typecheck commands. Each guessed them from `justfile`, `Makefile` or the package
 manifest, so two agents could run different commands, and a guess could
 miss a step CI runs. Alternatives: a `## Checks` section in the
 project's `CLAUDE.md`; a separate `docs/checks.md`; a section in

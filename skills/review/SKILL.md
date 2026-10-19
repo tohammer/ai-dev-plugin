@@ -10,8 +10,12 @@ description: Review a change against its spec and for defects using reviewer sub
 1. **Scope.** Determine the diff: the argument if given, otherwise the
    branch against its base, or the uncommitted changes. Find the spec it
    implements, if any.
-2. **Dispatch.** Send `devflow:reviewer` the diff range, the spec path
-   and the project's check commands.
+2. **Dispatch.** Send `devflow:reviewer` the diff range, the spec path,
+   the commands from `## Checks`, and the reasons implementer reports
+   gave for changes to existing tests, if known. Without that section, determine
+   the commands, tell the user which were used and offer to record them
+   with `/devflow:init`. A stale or duplicate
+   section: propose the fix to the user.
    - Small, ordinary change: one reviewer, default model.
    - Large or critical change: several reviewers in parallel, one focus
      each (spec conformance, correctness, security), on `model: "opus"`

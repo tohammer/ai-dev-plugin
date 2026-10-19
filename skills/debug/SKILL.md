@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Find and fix the cause of a bug, test failure or unexpected behaviour by reproducing it, isolating the cause with evidence and adding a regression test. Use before proposing a fix for any defect whose cause is not already known.
+description: Find and fix the cause of a bug, test failure or unexpected behaviour by reproducing it, isolating the cause with evidence and adding a regression test. Use before proposing a fix for any defect whose cause is not already known. Not for flaky tests; use devflow:test.
 ---
 
 # Debug
@@ -17,7 +17,11 @@ description: Find and fix the cause of a bug, test failure or unexpected behavio
    cannot explain why the failure happens, you have not found the cause.
 4. **Fix.** Write a test that fails for this cause, then fix the cause,
    not the symptom. Keep the fix to the defect.
-5. **Verify.** Run the reproduction and the project's checks.
+5. **Verify.** Run the reproduction and the checks from `## Checks`
+   (brief agents with them). Without that section, determine the
+   commands, tell the user which were used and offer to record them
+   with `/devflow:init`. A stale or duplicate
+   section: propose the fix to the user.
 
 ## Subagents
 

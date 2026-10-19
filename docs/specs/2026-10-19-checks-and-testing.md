@@ -1,6 +1,6 @@
 # Check commands, testing rules and a test skill
 
-Status: approved
+Status: implemented
 Date: 2026-10-19
 
 ## Purpose
@@ -247,32 +247,48 @@ within 100 lines.
     added at unit level, the flaky test fixed at the cause, no retry or
     skip added.
 
+## Deviations
+
+Added in review, beyond the Design above:
+
+- `debug`'s description excludes flaky tests and `core.md` routes them
+  to `/devflow:test`; both skills claimed them.
+- `review` passes the reviewer the reasons implementer reports gave for
+  changes to existing tests; the reviewer cannot see those reports.
+- `test` step 5 assigns the repetitions to `verifier` and the fix to
+  `implementer`; an approved quarantine is the one exception to "never
+  skip". Step 6 has the implementer break code briefly.
+- Duplicate `## Checks`: `implementer` and the orchestrating skills
+  handle it too, not only `verifier`.
+- `init` step 2 runs the `AGENTS.md` rules before writing `## Checks`
+  into a project set up earlier.
+
 ## Tasks
 
-- [ ] 1. `init` writes `## Checks`: the new step, the format, the
+- [x] 1. `init` writes `## Checks`: the new step, the format, the
   existing-project case, the `AGENTS.md` cases, the updated
   description. *Done when* the skill text contains the format and steps
   above and stays within 100 lines, *shown by* `tests/run.sh` and the
   three `init` smoke tests.
   Parallel with 4.
-- [ ] 2. Readers use `## Checks`: `verifier`, `implementer`,
+- [x] 2. Readers use `## Checks`: `verifier`, `implementer`,
   `implement`, `review`, `debug`, `wrapup`, `audit`. *Done when* each
   names `## Checks` as the source and the fallback is as specified,
   *shown by* `tests/run.sh` and reading the diff.
-- [ ] 3. Testing rules: `implementer` rules, `reviewer` check, spec
+- [x] 3. Testing rules: `implementer` rules, `reviewer` check, spec
   template `*shown by*`, `implement` step 4. *Done when* the rules
   replace the old test-first line, the key phrase is in both agents,
   and `spec` stays within 100 lines, *shown by* `tests/run.sh`.
-- [ ] 4. `skills/test/SKILL.md` as designed, plus `tests/run.sh`: `test`
+- [x] 4. `skills/test/SKILL.md` as designed, plus `tests/run.sh`: `test`
   in the skill list and the key-phrase check over the three files.
   *Done when* the skill matches the Design section, *shown by*
   `tests/run.sh` (the key-phrase check fails until task 3 is done if
   run first; run it after both). Parallel with 1.
-- [ ] 5. Docs: `core.md` names `/devflow:test` within 70 lines; README
+- [x] 5. Docs: `core.md` names `/devflow:test` within 70 lines; README
   (command table, `CLAUDE.md` `## Checks` under Configuration,
   marketplace install marked tested); `architecture.md` components.
   *Done when* the docs match the change, *shown by* `tests/run.sh` and
   `devflow:doc-checker` on the branch.
-- [ ] 6. Smoke tests. *Done when* the three headless runs in Testing
+- [x] 6. Smoke tests. *Done when* the three headless runs in Testing
   behave as described, *shown by* their transcripts summarised in the
   task report; deviations become fixes or backlog items.

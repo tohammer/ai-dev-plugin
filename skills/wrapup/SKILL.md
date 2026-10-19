@@ -28,8 +28,11 @@ description: Bring the documentation in line with a finished change - README, ar
    becomes `docs/architecture/<area>.md` with the original as index.
    `docs/backlog.md` past about 150 lines, or with clearly distinct
    areas, becomes `docs/backlog/<area>.md`.
-4. **Verify.** Run the project's checks one last time
-   (`devflow:verifier`).
+4. **Verify.** Run the checks from `## Checks` one last time
+   (`devflow:verifier`). Without that section, determine the commands,
+   tell the user which were used and offer to record them with
+   `/devflow:init`. A stale or duplicate
+   section: propose the fix to the user.
 5. **Report.** Tell the user what changed in the docs, the state of the
    checks, and what is next. Commit only if the user has asked for it;
    docs go in the same commit as the code they describe.
