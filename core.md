@@ -4,9 +4,9 @@ Rules for all development work; project `CLAUDE.md` takes precedence.
 
 ## Workflow
 
-- **Trivial change:** do it directly.
-- **Non-trivial feature:** `/devflow:spec` → the user reviews the spec →
-  `/devflow:implement` → `/devflow:review` → `/devflow:wrapup`.
+- Trivial change: do it directly. Non-trivial feature: `/devflow:spec`
+  → the user reviews the spec → `/devflow:implement` → `/devflow:review`
+  → `/devflow:wrapup` → `/devflow:ship`.
 - A change is non-trivial when it adds a component, changes an interface
   or data format other code depends on, or cannot be described completely
   in two sentences. When unsure, treat it as non-trivial.

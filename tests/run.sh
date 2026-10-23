@@ -41,7 +41,7 @@ core_is_short() { [ "$(wc -l < core.md)" -le 70 ]; }
 check "core.md is at most 70 lines" core_is_short
 
 # Skills
-for name in init spec implement review debug wrapup audit userdocs test; do
+for name in init spec implement review debug wrapup audit userdocs test ship; do
     f="skills/$name/SKILL.md"
     check "$f exists" test -f "$f"
     check "$f has name" has_field "$f" name

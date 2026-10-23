@@ -34,5 +34,6 @@ description: Bring the documentation in line with a finished change - README, ar
    `/devflow:init`. A stale or duplicate
    section: propose the fix to the user.
 5. **Report.** Tell the user what changed in the docs, the state of the
-   checks, and what is next. Commit only if the user has asked for it;
-   docs go in the same commit as the code they describe.
+   checks, and what is next. Commit only if the user has asked for it,
+   docs in the same commit as their code. To integrate the branch
+   (commit tidying, PR or merge), hand over to `/devflow:ship`.
