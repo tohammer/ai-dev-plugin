@@ -41,15 +41,14 @@ of 500 lines, no feature area moved to `docs/user/<topic>.md`, no
 binary-only user guide, and no visuals made with VHS or asciinema.
 Origin: task 5 of the userdocs spec. Revisit on the first long README.
 
+## `ship` paths are untested
 
-## `ship` skill for finishing a branch
-
-No skill covers integration: final checks, commit tidying and message
-convention, PR description from spec and review report, the choice
-between merge, PR and keeping the branch, branch cleanup. `wrapup`
-would hand over to it. Overlaps with `release` on commits and
-changelog; consider speccing both together. Origin: workflow gap
-analysis 2026-10-18.
+The smoke tests covered squash + rebase + local merge, a failing check
+and `fast-forward` with a moved default branch. Untested: `regroup`,
+`keep`, `merge commit`, no `gh`, no remote, the open-PR run, a
+colleague's push to the branch (lease with the noted SHA), and a
+rejected plan. Origin: task 4 and review of the ship spec. Revisit
+after the first real ships.
 
 ## `refactor` skill for behaviour-preserving changes
 
@@ -71,8 +70,12 @@ Origin: workflow gap analysis 2026-10-18.
 
 Version bump per the project's scheme, `CHANGELOG.md` from merged
 changes, tag, release notes, post-publish check. Only for projects that
-publish releases. Origin: workflow gap analysis 2026-10-18. Revisit
-when a devflow project needs a release, or together with `ship`.
+publish releases. Origin: workflow gap analysis 2026-10-18. Commit
+messages follow the project's convention (ADR 0012), so `release`
+builds the changelog from merges, PRs or specs since the last tag,
+using prefixes only where the project has them. Settings can go in
+`## Shipping` (ADR 0011). Revisit when a devflow project needs a
+release.
 
 ## Migration and rollback section in the spec template
 

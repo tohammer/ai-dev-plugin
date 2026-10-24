@@ -1,9 +1,9 @@
 # devflow
 
 A development-workflow plugin for Claude Code: it takes a feature from
-spec to implementation, review and wrap-up, runs most of the work in
-subagents on cheaper models, and keeps one documentation layout across
-projects.
+spec to implementation, review, wrap-up and shipping, runs most of the
+work in subagents on cheaper models, and keeps one documentation layout
+across projects.
 
 ## Status
 
@@ -54,7 +54,7 @@ claude plugin disable superpowers
 
 Trivial changes are done directly. A non-trivial feature (a new
 component, a changed interface, or anything not describable in two
-sentences) goes through four commands:
+sentences) goes through five commands:
 
 | Step | Command | What happens |
 |---|---|---|
@@ -62,6 +62,7 @@ sentences) goes through four commands:
 | 2 | `/devflow:implement` | Each task is briefed to an implementer subagent, checked and ticked off. Refuses a spec that is not approved. |
 | 3 | `/devflow:review` | Reviewer subagents examine the change; findings are verified, then fixed or deferred to the backlog. UI changes without automated tests are tested by hand, by Claude where it can, otherwise by you with the steps it gives. |
 | 4 | `/devflow:wrapup` | README, user docs, architecture, ADRs, backlog and next-steps are brought in line with the change. |
+| 5 | `/devflow:ship` | Checks are green, commits are tidied per the shipping policy, and a PR is opened or the branch merged locally after you confirm the plan; the branch is deleted after the merge. The first run asks for the policy and records it. |
 
 Commands for any time, also on work that did not start from a spec:
 
@@ -127,6 +128,35 @@ kinds (`e2e`, `coverage`) may follow. In a project with an `AGENTS.md`,
 section into `AGENTS.md`, so other coding agents get the commands too.
 Without the section, skills determine the commands from the project's
 files, say which they used and offer to record them with `/devflow:init`.
+
+### Shipping policy
+
+A `## Shipping` section of `CLAUDE.md` tells `/devflow:ship` how to
+integrate a branch. The first run asks three questions, each with a
+recommendation, and writes the section. Edit it by hand when your mind
+changes:
+
+```markdown
+## Shipping
+
+- history: squash
+- merge: rebase
+- target: pull request
+```
+
+- `history`: `squash` (one commit per branch), `keep` (commits as they
+  are) or `regroup` (new commits by topic, for branches with fixup or
+  WIP commits; you confirm the grouping).
+- `merge`: `fast-forward` (only when the branch is on top of the default
+  branch), `rebase` (rebase onto the default branch, then fast-forward)
+  or `merge commit`.
+- `target`: `pull request` or `local merge`. This is a default; you can
+  override it per run, and keeping the branch is always offered.
+
+The section sits where `## Checks` does: in `CLAUDE.md`, or in the
+imported `AGENTS.md` when `## Checks` is there. Commit messages follow
+the project's existing style (stated in `CLAUDE.md`, else read from
+recent commits), not one imposed by devflow.
 
 ### Agents and models
 
