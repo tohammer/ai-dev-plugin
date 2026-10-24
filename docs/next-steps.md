@@ -5,15 +5,10 @@ to `docs/architecture.md` or an ADR.
 
 ## Next
 
-1. Use the plugin on a real feature and collect what needs tuning in the
-   backlog.
-2. Run `/devflow:audit` on a real project to exercise the reviewer
-   dispatch (backlog: "`audit` dispatch path is untested").
-3. Run `/devflow:userdocs` on a long README (emacs-quarry,
-   ai-dev-environment) to exercise the move to `docs/user/`
-   (backlog: "`userdocs` move paths are untested").
-4. Run `/devflow:init` on the projects set up earlier to add their
+1. Run `/devflow:init` on the projects set up earlier to add their
    `## Checks` section.
+2. Use `/devflow:ship` on real projects and collect findings in the
+   backlog (backlog: "`ship` paths are untested").
 
 ## Watch out for
 
