@@ -14,8 +14,6 @@ to `docs/architecture.md` or an ADR.
    (backlog: "`userdocs` move paths are untested").
 4. Run `/devflow:init` on the projects set up earlier to add their
    `## Checks` section.
-5. Ship the `ship` branch as a PR with `/devflow:ship` (task 5 of its
-   spec), and run it again after the merge to see the cleanup.
 
 ## Watch out for
 
