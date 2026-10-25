@@ -28,11 +28,22 @@ whole-project request ever loads `review`.
 ## `ship` paths are untested
 
 The smoke tests covered squash + rebase + local merge, a failing check
-and `fast-forward` with a moved default branch. Untested: `regroup`,
-`keep`, `merge commit`, no `gh`, no remote, the open-PR run, a
-colleague's push to the branch (lease with the noted SHA), and a
-rejected plan. Origin: task 4 and review of the ship spec. Revisit
-after the first real ships.
+and `fast-forward` with a moved default branch; shipping the ship
+branch covered `keep` + `merge commit` + pull request, with the PR
+merged on GitHub. Untested: `regroup`, merging through `gh pr merge`,
+no `gh`, no remote, a colleague's push to the branch (lease with the
+noted SHA), and a rejected plan. Origin: task 4 and review of the ship
+spec. Revisit after the first real ships.
+
+## Research how to improve the `debug` skill
+
+The skill has the basic loop: reproduce, isolate the cause with
+evidence, fix, regression test. Research what works well for agents
+and what is missing, e.g. hypothesis tracking, bisecting (`git
+bisect`, input reduction), using a real debugger or added logging and
+tracing, debugging without a local reproduction (production logs,
+reports), and when to stop and ask. Outcome: a list of changes to
+spec, or nothing. Origin: user request 2026-10-24.
 
 ## `refactor` skill for behaviour-preserving changes
 
