@@ -79,13 +79,13 @@ value: ask for this run, propose the fix.
    Plan the merge (`gh pr merge --rebase` for `fast-forward` and
    `rebase`, `--merge` for `merge commit`) and the cleanup; one
    confirmation. Merged elsewhere: plan the cleanup only.
-9. **Clean up** after a merge. Verify first: `git merge-base
-   --is-ancestor <branch> <default>` after a local merge, PR state
-   `MERGED` after a PR. Switch to the default branch, pull, delete the
-   remote branch, `git branch -d`. After a GitHub rebase or squash
-   merge `-d` refuses; if the PR is merged and the PR head has all
-   local commits, ask before `-D`. Never `-D` otherwise. After a local
-   merge `devflow:verifier` runs the checks on the default branch.
+9. **Clean up** after a merge. Verify: `git merge-base --is-ancestor
+   <branch> <default>` (local merge) or PR state `MERGED`. Switch to
+   the default branch, pull, delete the remote branch if `git ls-remote
+   --heads` lists it (else `git fetch --prune`), `git branch -d`. After
+   a GitHub rebase or squash merge `-d` refuses: ask before `-D` if the
+   PR is merged and its head has all local commits, never otherwise.
+   After a local merge `devflow:verifier` checks the default branch.
 10. **Report.** What landed where (commits, PR URL), check results, what
     was deleted, what was not done and why.
 
