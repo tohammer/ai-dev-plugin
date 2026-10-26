@@ -58,7 +58,7 @@ sentences) goes through five commands:
 
 | Step | Command | What happens |
 |---|---|---|
-| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list. For a larger UI topic it offers a static HTML mockup first. Only your approval sets `Status: approved`; implementation then starts without further prompting. |
+| 1 | `/devflow:spec` | Claude explores, asks questions and writes `docs/specs/YYYY-MM-DD-<topic>.md` with a task list. For a larger UI topic it offers a static HTML mockup first. Notes you leave in the spec are handled with targeted edits, never a rewrite, and each gets a line saying what changed. Only your approval sets `Status: approved`; implementation then starts without further prompting. |
 | 2 | `/devflow:implement` | Each task is briefed to an implementer subagent, checked and ticked off. Refuses a spec that is not approved. |
 | 3 | `/devflow:review` | Reviewer subagents examine the change; findings are verified, then fixed or deferred to the backlog. UI changes without automated tests are tested by hand, by Claude where it can, otherwise by you with the steps it gives. |
 | 4 | `/devflow:wrapup` | README, user docs, architecture, ADRs, backlog and next-steps are brought in line with the change. |
