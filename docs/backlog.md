@@ -35,11 +35,6 @@ no `gh`, no remote, a colleague's push to the branch (lease with the
 noted SHA), and a rejected plan. Origin: task 4 and review of the ship
 spec. Revisit after the first real ships.
 
-Found (PR #2, 2026-10-26): with GitHub's "automatically delete head
-branches", step 9's remote delete fails ("remote ref does not exist").
-Fix: check `git ls-remote --heads origin <branch>` first; delete only
-if present, else `git fetch --prune`.
-
 ## Research how to improve the `debug` skill
 
 The skill has the basic loop: reproduce, isolate the cause with
