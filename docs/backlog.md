@@ -45,6 +45,49 @@ tracing, debugging without a local reproduction (production logs,
 reports), and when to stop and ask. Outcome: a list of changes to
 spec, or nothing. Origin: user request 2026-10-24.
 
+## Diff view for spec revision rounds
+
+`spec` step 7 revises with targeted edits and reports per note, but for
+a long spec with many changes the user needs to see the actual diff on
+their own, outside the reply: a diff in the reply works for small
+rounds only, not for a 600-line spec with many changes. Origin: user
+request 2026-10-26; viewer decision deferred. Revisit when choosing a
+viewer.
+
+Baseline: on "recheck", stage the spec as it is (`git add <spec>`,
+notes included) before revising, so unstaged changes are exactly the
+agent's; stage again next round. No commits, no scratch files, every
+git tool understands it. Caveat: a commit in between takes the staged
+spec along. Without git: scratch copy plus `git diff --no-index`.
+
+Viewers (findings 2026-10-26):
+- `git diff --word-diff`: a rewrapped paragraph gets no markers but is
+  still listed as a hunk.
+- pandoc normalization removes reflow completely (tested), ad hoc via
+  process substitution with `--no-index`, or once per machine as a
+  `textconv` driver that every `git diff` based viewer then uses
+  (terminal, `less`, `git difftool`; magit untested):
+  `.gitattributes`: `docs/specs/*.md diff=prose`;
+  `git config diff.prose.textconv "pandoc -f gfm -t gfm --wrap=none"`.
+  The diff shows pandoc's rendering (uniform list markers, one line per
+  paragraph), not the text byte for byte.
+- pandiff diffs the pandoc AST and writes a standalone HTML page or
+  CriticMarkup; needs node; untested.
+- delta, difftastic, diff-so-fancy, meld: line-based, reflow shows.
+- Semantic line breaks (one sentence per line) in specs would keep
+  plain line diffs and GitHub clean.
+
+Reply variants mocked up
+(https://claude.ai/artifact/5G8XiZR313WUg1WHuV1tjg): word diff in the
+reply plus a colour command; change list plus command only; change
+list only.
+
+Other options from the same research, not chosen: a reply line under
+each note, deleted by the user once satisfied; a `## Revisions` log in
+the spec (Spec Kit `/clarify`); requirements, design and tasks approved
+as separate phases, approved ones frozen (Kiro); the spec reviewed as a
+draft PR, one commit and reply per comment thread (needs GitHub).
+
 ## `refactor` skill for behaviour-preserving changes
 
 Refactors fit neither "trivial" nor the full spec flow. Steps: check

@@ -5,10 +5,9 @@ description: Turn an idea for a non-trivial feature into a written spec with a t
 
 # Spec
 
-Produce `docs/specs/YYYY-MM-DD-<topic>.md` and get it reviewed. No code
-for the feature is written in this skill. Every question or choice put
-to the user gets a brief explanation, each option's pros and cons where
-they apply, and a recommendation with the reason it is better.
+Produce `docs/specs/YYYY-MM-DD-<topic>.md` and get it reviewed; no feature
+code here. Every question or choice put to the user gets a brief
+explanation, pros and cons per option, and a reasoned recommendation.
 
 ## Steps
 
@@ -28,9 +27,14 @@ they apply, and a recommendation with the reason it is better.
    requirement that can be read two ways.
 6. **Hand over.** Ask the user to review the file. If any point in it
    was not explicitly decided by the user, name it. Stop here.
-7. **Approve.** Set `Status: approved` only when the user says so. Apply
-   requested changes and ask again. Once approved, continue directly with
-   `/devflow:implement`; do not ask whether to start.
+7. **Revise.** For review notes or requested changes, find the user's
+   notes in whatever form they wrote them. Change only the text each one
+   concerns, with targeted edits; never rewrite the file or rewrap a
+   paragraph you did not change. Remove each note once handled. Report
+   per note what changed in which section, or why nothing did; ask again.
+8. **Approve.** Set `Status: approved` only when the user says so. Once
+   approved, continue directly with `/devflow:implement`; do not ask
+   whether to start.
 
 ## The task list
 
@@ -41,25 +45,22 @@ code. Order them so each leaves the project working; mark parallel ones.
 
 ## Mockups
 
-Offer a mockup once, as its own question, when the topic is a new
-screen or flow or a significant layout change and a question would be
-clearer shown than described. A UI topic alone is not reason enough;
-small questions can be answered with an ASCII sketch in the terminal.
-
-On a yes, write one self-contained static HTML file: two or three
-variants side by side, placeholder data, no backend, no external
-requests. Publish it as a private page if the session has an Artifact
-tool; otherwise give the user the file path to open in a browser. The
-user answers in the terminal; iterate until a direction is chosen. Keep
-the chosen version as `docs/specs/YYYY-MM-DD-<topic>-mockup.html` and
-link it from the spec's Design section.
+Offer a mockup once, as its own question, for a new screen or flow or
+a significant layout change that is clearer shown than described; a UI
+topic alone is not enough, small questions get an ASCII sketch. On a
+yes, write one self-contained static HTML file: two or three variants
+side by side, placeholder data, no backend, no external requests.
+Publish it as a private page if the session has an Artifact tool, else
+give the file path. The user answers in the terminal; iterate until a
+direction is chosen. Keep the chosen version as
+`docs/specs/YYYY-MM-DD-<topic>-mockup.html`, linked from Design.
 
 ## Decisions
 
 Record each non-obvious decision made on the way as an ADR in
-`docs/decisions/` with the next free number. The spec links to it
-instead of repeating the reasoning. ADR format: `# NNNN — <decision>`, then `Date:` and `Status: accepted`,
-then the sections Context, Decision, Consequences.
+`docs/decisions/` with the next free number; the spec links to it
+instead of repeating the reasoning. Format: `# NNNN — <decision>`,
+`Date:`, `Status: accepted`, then Context, Decision, Consequences.
 
 ## Spec template
 
@@ -93,8 +94,7 @@ UI paths the automated tests do not cover).
 
 ## Tasks
 
-Ordered. Each task is small enough for one subagent and names how to tell
-it is done and what shows it.
+Ordered, each sized for one subagent (see The task list).
 
 - [ ] 1. <Task>. *Done when* <criteria>, *shown by* <tests or manual check>.
 ````
