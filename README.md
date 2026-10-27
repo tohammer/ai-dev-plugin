@@ -69,7 +69,7 @@ Commands for any time, also on work that did not start from a spec:
 | Command | What happens |
 |---|---|
 | `/devflow:init` | Sets up the docs layout and records the project's check commands. In an existing project it proposes how to map the current docs and moves nothing without your approval. |
-| `/devflow:debug` | Finds the cause of a bug with evidence, fixes it and adds a regression test. |
+| `/devflow:debug` | Finds the cause of a bug with evidence (hypothesis log, `git bisect run` for regressions, a batch-mode debugger when logging is not enough), fixes it with a regression test and removes temporary logging. |
 | `/devflow:test` | Adds or repairs tests for existing code: picks the test level, pins current behaviour before a change, fixes flaky tests at the cause. |
 | `/devflow:audit` | Reviews a whole project: code, security, tests, build and CI, dependencies, docs, configuration, repository hygiene. Writes `docs/audits/YYYY-MM-DD.md`, fixes nothing, and adds the findings you confirm to the backlog. |
 | `/devflow:userdocs` | Writes or reworks the README and user docs in `docs/user/` to a fixed structure, and checks their commands and options against the code. |

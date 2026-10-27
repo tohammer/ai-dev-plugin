@@ -35,16 +35,6 @@ no `gh`, no remote, a colleague's push to the branch (lease with the
 noted SHA), and a rejected plan. Origin: task 4 and review of the ship
 spec. Revisit after the first real ships.
 
-## Research how to improve the `debug` skill
-
-The skill has the basic loop: reproduce, isolate the cause with
-evidence, fix, regression test. Research what works well for agents
-and what is missing, e.g. hypothesis tracking, bisecting (`git
-bisect`, input reduction), using a real debugger or added logging and
-tracing, debugging without a local reproduction (production logs,
-reports), and when to stop and ask. Outcome: a list of changes to
-spec, or nothing. Origin: user request 2026-10-24.
-
 ## Diff view for spec revision rounds
 
 `spec` step 7 revises with targeted edits and reports per note, but for
