@@ -51,8 +51,8 @@ always; Review focus and Links only with content.
 | Why | reviewer, maintainer: what was wrong or missing? | how it was built | spec Purpose, bug report |
 | Approach | reviewer, maintainer: why this design, what was ruled out, which limits? | file walk-through, ADR text | spec Design, ADRs |
 | Impact | users, operators: what changes in behaviour, interface, config, migration, breaking? | internals; write "None" if nothing | README, user-doc changes |
-| Verification | reviewer: how shown to work, how to reproduce? | raw logs, anything not run this session | checks, manual checks |
-| Review focus | reviewer: where to look hard, what is open? | what history needs | deferred findings, risks, untested paths |
+| Verification | reviewer: how shown to work, how to reproduce? | raw logs, anything not run this session, checks CI runs on the PR | checks CI does not run, manual checks |
+| Review focus | reviewer: where to look hard, what is open? | what history needs, fixed findings | deferred findings, risks, untested paths |
 | Links | tooling: where is the context? | prose repeating links | spec, ADRs, `Fixes #N` |
 
 Only Summary may repeat another section. Length follows the change: a

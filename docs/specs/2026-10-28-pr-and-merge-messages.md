@@ -105,8 +105,8 @@ are always present; Review focus and Links only when they have content.
 | Why | reviewer, later maintainer | What was wrong or missing? | how it was built | spec Purpose, bug report |
 | Approach | reviewer, later maintainer | Why this design, what was ruled out, which limits? | a walk through the files, ADR text | spec Design, ADRs |
 | Impact | users, operators, release notes | What changes outside the code: behaviour, interface, config, migration, breaking changes? | internal details; "None" when nothing changes | README and user-docs changes |
-| Verification | reviewer, QA | How is it shown to work, how is it reproduced? | raw logs, anything not run in this session | checks and manual checks run |
-| Review focus | reviewer now | Where to look hard, which feedback is wanted, what is open? | anything history needs | deferred findings, risks, untested paths |
+| Verification | reviewer, QA | How is it shown to work, how is it reproduced? | raw logs, anything not run in this session, checks CI runs on the PR | checks CI does not run, manual checks run |
+| Review focus | reviewer now | Where to look hard, which feedback is wanted, what is open? | anything history needs, fixed findings | deferred findings, risks, untested paths |
 | Links | tooling, maintainer | Where is the full context? | prose that repeats the links | spec, ADRs, `Fixes #N` |
 
 Only Summary may repeat content of another section. Length follows the
