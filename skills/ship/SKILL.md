@@ -7,9 +7,8 @@ description: Integrate a finished branch - final checks, commit tidying, PR or l
 
 Pushes, force pushes, merges into the default branch and branch
 deletions happen only as listed in a plan the user confirmed. Integrate
-only with checks green in this session. Every question to the user
-carries a brief explanation, pros and cons per option and a
-recommendation with the reason.
+only with checks green in this session. Questions to the user: brief
+explanation, pros and cons per option, recommendation with reason.
 
 ## Shipping policy
 
@@ -34,15 +33,21 @@ GitHub and `gh` works, else `local merge`. Write the section and commit
 it on the branch as its own commit, kept out of the tidying. An unknown
 value: ask for this run, propose the fix.
 
+## Messages
+
+Load `devflow:describe` (with check results and review findings) for
+the PR text, the squash message and the merge message. Other commits
+(policy, uncommitted changes, regroup) follow CLAUDE.md's convention,
+else the last ~20 commits on the default branch; regroup bodies say
+what changed and why. Harness attribution lines come last.
+
 ## Steps
 
 1. **State.** Current and default branch, upstream, working tree.
    Note the branch tip SHA; a rejected plan resets the branch to it.
    - On the default branch: nothing to ship; say so, stop.
-   - Uncommitted changes: show them, propose committing them; the
-     user decides, and if they decline, stop.
-   - Spec for the branch not `Status: implemented`: offer
-     `/devflow:wrapup` first.
+   - Uncommitted changes: show them, propose a commit; declined: stop.
+   - Branch spec not `Status: implemented`: offer `/devflow:wrapup`.
    - Open PR for the branch (`gh pr view`): step 2, then step 8.
 2. **Policy.** Read `## Shipping`; if missing, ask and write it.
 3. **Sync.** Fetch. Fast-forward the local default branch to its
@@ -55,19 +60,21 @@ value: ask for this run, propose the fix.
    Without it: determine the commands, say which, offer
    `/devflow:init`. Failure stops the ship (offer `/devflow:debug`);
    a check that could not run is not green.
-5. **Tidy.** Apply `history`. Afterwards `git diff <pre-tidy SHA>`
-   must be empty, so the checked tree is the one that lands.
-6. **Plan.** Show the commits that land, merge method, target, every
-   push, PR title and description, branches to delete. Pushed commits
-   rewritten in step 3 or 5 need a force push only if the branch is
-   pushed again (PR target): `--force-with-lease=<branch>:<upstream
-   SHA>`. Local merge: no force push. One confirmation covers the
-   listed steps only; the user may switch target or keep the branch.
+5. **Tidy.** Apply `history`; squash message from describe, no ` (#N)`.
+   Then `git diff <pre-tidy SHA>` must be empty: the checked tree lands.
+6. **Plan.** Show the commits that land (a squash message in full),
+   merge method, target, every push, branches to delete. PR target:
+   the PR title and body. Local merge: the merge message, and the open
+   points (risks, untested paths, deferred findings) no PR shows. Pushed
+   commits rewritten in step 3 or 5 need a force push only if pushed
+   again (PR target): `--force-with-lease=<branch>:<upstream SHA>`. One
+   confirmation covers the listed steps only; the user may keep the
+   branch or switch target (rerun describe).
 7. **Integrate.**
-   - Pull request: push, `gh pr create` with title and description,
-     report the URL, stop. Without `gh`: push, give them to paste.
-   - Local merge: merge per `merge` into the default branch, push it
-     if it has an upstream.
+   - Pull request: push, `gh pr create --title <title> --body-file
+     <file>`, report the URL, stop. Without `gh`: push, give the text.
+   - Local merge per `merge`; `merge commit`: `git merge --no-ff -F
+     <message file>`. Push the default branch if it has an upstream.
    - Keep: report the branch state, stop.
    No remote: only local merge or keep. Push or `gh` fails, or the
    lease is rejected: report the error and the state left, skip
@@ -76,9 +83,12 @@ value: ask for this run, propose the fix.
    offer to push. Report `gh pr view`: checks, reviews, mergeable;
    green means its required checks passed, else run `## Checks`.
    `fast-forward`: the PR head must contain the base tip, else stop.
-   Plan the merge (`gh pr merge --rebase` for `fast-forward` and
-   `rebase`, `--merge` for `merge commit`) and the cleanup; one
-   confirmation. Merged elsewhere: plan the cleanup only.
+   Plan merge and cleanup, one confirmation: `gh pr merge --rebase`
+   (no message) for `fast-forward` and `rebase`. `merge commit`: rerun
+   describe with the PR number and the `gh pr view` body, show the
+   message, then `gh pr merge --merge --subject <first line> --body-file
+   <rest>`. Flags rejected: as step 7; never GitHub's default message.
+   Merged elsewhere: plan cleanup only.
 9. **Clean up** after a merge. Verify: `git merge-base --is-ancestor
    <branch> <default>` (local merge) or PR state `MERGED`. Switch to
    the default branch, pull, delete the remote branch if `git ls-remote
@@ -88,13 +98,3 @@ value: ask for this run, propose the fix.
    After a local merge `devflow:verifier` checks the default branch.
 10. **Report.** What landed where (commits, PR URL), check results, what
     was deleted, what was not done and why.
-
-## Messages
-
-- Commit: convention from CLAUDE.md if stated, else from the last ~20
-  commits on the default branch. Squashed or regrouped: body on what
-  changed and why, from the spec's Purpose and the replaced commits.
-- PR: title as a commit subject. Body: Purpose (1-3 lines from the
-  spec), Changes, Testing (checks, manual checks from the spec), Review
-  (findings fixed, deferred with backlog items), links to spec and ADRs.
-- Attribution lines the harness asks for come last in both.
