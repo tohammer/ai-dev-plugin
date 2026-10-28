@@ -13,7 +13,7 @@ orchestrating model and agent definitions for subagents. The only executable par
 |---|---|---|
 | `core.md` | General instructions present in every session: workflow, docs layout, subagent and model rules, verification | — |
 | `hooks/` | SessionStart hook that prints `core.md` into the session | `core.md` |
-| `skills/` | One skill per phase: init, spec, implement, review, debug, wrapup, ship; `audit` (whole-project review), `userdocs` (user-facing docs) and `test` (tests for existing code) are not phases of the feature workflow. Loaded on demand. `spec` and `init` embed the document starting content; `init` also records the project's check commands | agents |
+| `skills/` | One skill per phase: init, spec, implement, review, debug, wrapup, ship; `audit` (whole-project review), `userdocs` (user-facing docs), `test` (tests for existing code) and `describe` (writes PR and landing commit messages; loaded by `ship`) are not phases of the feature workflow. Loaded on demand. `spec` and `init` embed the document starting content; `init` also records the project's check commands | agents |
 | `agents/` | Subagent definitions with a default model each: explorer, verifier, doc-checker, implementer, reviewer. `implementer` holds the testing rules, `reviewer` checks them | — |
 | `tests/run.sh` | Structure checks: hook output, frontmatter, size limits, references, the testing rules' key phrase in all three copies | all of the above |
 
@@ -32,6 +32,9 @@ orchestrating model and agent definitions for subagents. The only executable par
 - A project's shipping policy (history, merge, target) lives in a
   `## Shipping` section beside `## Checks`, written by `ship` on first
   use (ADR 0011).
+- `ship` loads `describe` for all PR and landing commit messages. A format
+  in `CLAUDE.md` or a PR template takes precedence; subjects follow the
+  detected commit convention (ADRs 0012, 0013).
 - The testing rules exist in `implementer`, `reviewer` and the `test`
   skill, because skills cannot read plugin files (ADR 0010). Change all
   three together.
@@ -55,11 +58,15 @@ orchestrating model and agent definitions for subagents. The only executable par
   `@AGENTS.md`. Custom subagents load `CLAUDE.md` unless they set
   `omitClaudeMd`; the built-in Explore and Plan agents do not.
 - `core.md` (70), `init`, `spec`, `audit` and `ship` (100) are at their
-  line caps; any addition there needs tightening elsewhere.
+  line caps, `describe` (99) is near it; any addition there needs
+  tightening elsewhere.
 - `git push --force-with-lease` without an expected SHA compares with
   the remote-tracking ref, which a fetch has just updated, so it
   overwrites a push made in between. Pass `<branch>:<sha>` noted before
   the rewrite.
+- A vague trigger for the PR diagram ("prose would need more than a
+  paragraph") produced no diagram in smoke tests; concrete triggers (new
+  component, new call path, changed state) did.
 - Headless smoke test of one phase:
   `claude --plugin-dir . -p "/devflow:init" --permission-mode acceptEdits </dev/null`
   in a scratch repo; continue the same session with `-c -p "…"`.

@@ -30,10 +30,11 @@ whole-project request ever loads `review`.
 The smoke tests covered squash + rebase + local merge, a failing check
 and `fast-forward` with a moved default branch; shipping the ship
 branch covered `keep` + `merge commit` + pull request, with the PR
-merged on GitHub. Untested: `regroup`, merging through `gh pr merge`,
-no `gh`, no remote, a colleague's push to the branch (lease with the
-noted SHA), and a rejected plan. Origin: task 4 and review of the ship
-spec. Revisit after the first real ships.
+merged on GitHub. Untested: `regroup`, merging through `gh pr merge`
+(with `--subject`/`--body-file`), no `gh`, no remote, a colleague's
+push to the branch (lease with the noted SHA), and a rejected plan.
+Origin: task 4 and review of the ship spec. Revisit after the first
+real ships.
 
 ## Diff view for spec revision rounds
 
@@ -104,6 +105,13 @@ builds the changelog from merges, PRs or specs since the last tag,
 using prefixes only where the project has them. Settings can go in
 `## Shipping` (ADR 0011). Revisit when a devflow project needs a
 release.
+
+## Update an open PR's description when the branch changes
+
+`ship` writes the PR body once, at creation; later commits leave it
+stale. Google's guide asks to check that the description still matches
+before submitting. Origin: spec 2026-10-28 PR and merge messages, Scope,
+Out. Revisit when a PR gets commits after it was opened.
 
 ## Migration and rollback section in the spec template
 
