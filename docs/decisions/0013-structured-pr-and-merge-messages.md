@@ -1,7 +1,8 @@
 # 0013 — PR and merge messages have a defined structure
 
 Date: 2026-10-28
-Status: accepted
+Status: accepted; merge messages for pull requests superseded by
+[0015](0015-pr-merge-message-from-the-forge.md)
 
 ## Context
 

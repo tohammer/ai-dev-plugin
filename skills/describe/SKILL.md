@@ -13,14 +13,15 @@ PR body as two files. Never commit, push or call `gh`.
 
 Branch range against the default branch; the spec and the ADRs it
 links; check results of this session; review findings (fixed and
-deferred); PR number and body if one exists; target (pull request or
-local merge) and merge method.
+deferred); target (pull request or local merge) and merge method.
 
 ## Outputs
 
 - PR title and body: only when the target is a pull request.
-- Landing commit message: squash or merge variant, both when a squash
-  commit lands through a merge commit. None for rebase, fast-forward.
+- Landing commit message: squash variant; merge variant for a local
+  merge only, as a PR's merge commit takes its message from the PR via
+  the forge. Both for a squash then a local merge commit. None for
+  rebase and fast-forward.
 
 ## Precedence
 
@@ -71,7 +72,7 @@ commit message.
 ## Landing commit message
 
 - Subject: the title (see Title), written once and reused by every
-  variant, plus ` (#N)` when the change goes through a PR.
+  variant.
 - Squash (the only record): Why, Approach and Impact (unless "None") as
   plain paragraphs, no headings.
 - Merge (branch commits carry the detail): Summary and Why.
@@ -95,5 +96,4 @@ commit message.
 
 - No spec: take Why and Approach from commits and conversation. Reason
   unknown: ask; never invent one.
-- No PR yet: no ` (#N)`.
 - No checks run this session: Verification says so.

@@ -36,7 +36,8 @@ value: ask for this run, propose the fix.
 ## Messages
 
 Load `devflow:describe` (with check results and review findings) for
-the PR text, the squash message and the merge message. Other commits
+the PR text, the squash message and a local merge message (a PR's
+merge commit takes its message from the PR via the forge). Other commits
 (policy, uncommitted changes, regroup) follow CLAUDE.md's convention,
 else the last ~20 commits on the default branch; regroup bodies say
 what changed and why. Harness attribution lines come last.
@@ -60,7 +61,7 @@ what changed and why. Harness attribution lines come last.
    Without it: determine the commands, say which, offer
    `/devflow:init`. Failure stops the ship (offer `/devflow:debug`);
    a check that could not run is not green.
-5. **Tidy.** Apply `history`; squash message from describe, no ` (#N)`.
+5. **Tidy.** Apply `history`; the squash message comes from describe.
    Then `git diff <pre-tidy SHA>` must be empty: the checked tree lands.
 6. **Plan.** Show the commits that land (a squash message in full),
    merge method, target, every push, branches to delete. PR target:
@@ -84,11 +85,9 @@ what changed and why. Harness attribution lines come last.
    green means its required checks passed, else run `## Checks`.
    `fast-forward`: the PR head must contain the base tip, else stop.
    Plan merge and cleanup, one confirmation: `gh pr merge --rebase`
-   (no message) for `fast-forward` and `rebase`. `merge commit`: rerun
-   describe with the PR number and the `gh pr view` body, show the
-   message, then `gh pr merge --merge --subject <first line> --body-file
-   <rest>`. Flags rejected: as step 7; never GitHub's default message.
-   Merged elsewhere: plan cleanup only.
+   for `fast-forward` and `rebase`, `--merge` for `merge commit`; the
+   forge writes the message from the PR. Merged elsewhere: plan
+   cleanup only.
 9. **Clean up** after a merge. Verify: `git merge-base --is-ancestor
    <branch> <default>` (local merge) or PR state `MERGED`. Switch to
    the default branch, pull, delete the remote branch if `git ls-remote

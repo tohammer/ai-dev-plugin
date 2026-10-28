@@ -32,9 +32,11 @@ orchestrating model and agent definitions for subagents. The only executable par
 - A project's shipping policy (history, merge, target) lives in a
   `## Shipping` section beside `## Checks`, written by `ship` on first
   use (ADR 0011).
-- `ship` loads `describe` for all PR and landing commit messages. A format
-  in `CLAUDE.md` or a PR template takes precedence; subjects follow the
-  detected commit convention (ADRs 0012, 0013).
+- `ship` loads `describe` for the PR text, squash messages and local
+  merge messages; a PR's merge commit takes its message from the PR via
+  the forge. A format in `CLAUDE.md` or a PR template takes precedence;
+  subjects follow the detected commit convention (ADRs 0012, 0013,
+  0015).
 - The testing rules exist in `implementer`, `reviewer` and the `test`
   skill, because skills cannot read plugin files (ADR 0010). Change all
   three together.

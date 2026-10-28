@@ -30,11 +30,10 @@ whole-project request ever loads `review`.
 The smoke tests covered squash + rebase + local merge, a failing check
 and `fast-forward` with a moved default branch; shipping the ship
 branch covered `keep` + `merge commit` + pull request, with the PR
-merged on GitHub. Untested: `regroup`, merging through `gh pr merge`
-(with `--subject`/`--body-file`), no `gh`, no remote, a colleague's
-push to the branch (lease with the noted SHA), and a rejected plan.
-Origin: task 4 and review of the ship spec. Revisit after the first
-real ships.
+merged on GitHub. Untested: `regroup`, merging through `gh pr merge`,
+no `gh`, no remote, a colleague's push to the branch (lease with the
+noted SHA), and a rejected plan. Origin: task 4 and review of the ship
+spec. Revisit after the first real ships.
 
 ## Diff view for spec revision rounds
 

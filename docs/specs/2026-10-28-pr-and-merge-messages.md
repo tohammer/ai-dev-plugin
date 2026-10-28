@@ -213,6 +213,12 @@ message `gh pr merge` writes on the later run.
   sync merge, not the commit that lands.
 - Known limit: changing the squash message at the plan needs a
   rejected plan, which resets the branch.
+- After shipping (PR #5), the user decided that a PR's merge commit
+  takes its message from the PR through the forge (GitHub, Zuul or
+  other), and `ship` drafts merge messages for local merges only
+  ([ADR 0015](../decisions/0015-pr-merge-message-from-the-forge.md)).
+  The step 8 rerun of `describe` and `gh pr merge --subject/--body-file`
+  were removed; PR #5 was merged on GitHub with its description.
 
 ## Tasks
 
@@ -229,6 +235,6 @@ message `gh pr merge` writes on the later run.
   `architecture.md` (components, describe at its cap if so). Add the
   backlog item for updating an open PR's description. *Done when*
   `devflow:doc-checker` finds nothing stale, *shown by* its report.
-- [ ] 4. Ship this feature as a PR and merge it on a later run. *Done
+- [x] 4. Ship this feature as a PR and merge it on a later run. *Done
   when* the PR body and the merge commit follow Design, *shown by*
   `gh pr view` and `git log -1` on the default branch.

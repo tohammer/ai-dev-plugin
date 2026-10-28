@@ -62,7 +62,7 @@ sentences) goes through five commands:
 | 2 | `/devflow:implement` | Each task is briefed to an implementer subagent, checked and ticked off. Refuses a spec that is not approved. |
 | 3 | `/devflow:review` | Reviewer subagents examine the change; findings are verified, then fixed or deferred to the backlog. UI changes without automated tests are tested by hand, by Claude where it can, otherwise by you with the steps it gives. |
 | 4 | `/devflow:wrapup` | README, user docs, architecture, ADRs, backlog and next-steps are brought in line with the change. |
-| 5 | `/devflow:ship` | Checks are green, commits are tidied per the shipping policy, and a PR is opened or the branch merged locally after you confirm the plan; the branch is deleted after the merge. PR descriptions and merge messages come from `describe`. The first run asks for the policy and records it. |
+| 5 | `/devflow:ship` | Checks are green, commits are tidied per the shipping policy, and a PR is opened or the branch merged locally after you confirm the plan; the branch is deleted after the merge. PR descriptions, squash and local merge messages come from `describe`. The first run asks for the policy and records it. |
 
 Commands for any time, also on work that did not start from a spec:
 
@@ -159,9 +159,10 @@ imported `AGENTS.md` when `## Checks` is there. Commit messages follow
 the project's existing style (stated in `CLAUDE.md`, else read from
 recent commits), not one imposed by devflow.
 
-PR descriptions and the messages of merge and squash commits come from
-`/devflow:describe`, and `ship` sets them itself instead of GitHub's
-defaults. The description has the sections Summary, Why, Approach,
+PR descriptions, squash commit messages and local merge messages come
+from `/devflow:describe`. A PR's merge commit takes its message from
+the PR through GitHub or another forge, so ship passes none. The
+description has the sections Summary, Why, Approach,
 Impact, Verification, Review focus and Links. A squash commit keeps
 Why, Approach and Impact, a merge commit Summary and Why; neither gets
 test results or review notes.
