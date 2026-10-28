@@ -26,10 +26,10 @@ You orchestrate; subagents write the code.
    commands from `## Checks`), the mockup if the spec links one, and
    what not to touch. The subagent sees nothing else, so include the
    paths and facts it needs.
-2. **Pick the model.** Default is sonnet. Pass `model: "opus"` for tasks
-   involving concurrency, security, cross-module interfaces or subtle
-   logic; `model: "haiku"` for mechanical ones (renames, fixtures,
-   boilerplate from an explicit pattern).
+2. **Pick the model** (host spelling per `core.md`). Default sonnet;
+   opus for tasks involving concurrency, security, cross-module
+   interfaces or subtle logic; haiku for mechanical ones (renames,
+   fixtures, boilerplate from an explicit pattern).
 3. **Dispatch.** Tasks the spec marks as independent may run in
    parallel, provided they do not edit the same files.
 4. **Check.** Read the diff yourself against the acceptance criteria.

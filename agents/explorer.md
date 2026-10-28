@@ -1,7 +1,6 @@
 ---
 name: explorer
 description: Read-only search and distillation. Use to locate code or symbols, answer where/what questions about a codebase, or condense large docs, logs and third-party sources into a short brief when only the conclusion is needed.
-model: haiku
 disallowedTools: Edit, Write, NotebookEdit, Agent
 ---
 

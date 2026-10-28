@@ -55,12 +55,12 @@ docs/next-steps.md                 what to do next, nothing else
 
 - Use a subagent when only the conclusion is needed or the work is
   separable. Do not spawn one for a small lookup.
-- Agents (default model): haiku `devflow:explorer`, `devflow:verifier`,
-  `devflow:doc-checker`; sonnet `devflow:implementer`, `devflow:reviewer`.
-- Pick the cheapest model that can do the task well, and override the
-  default with the Agent tool's `model` parameter: haiku for mechanical
-  work, sonnet for ordinary implementation and review, opus for complex
-  tasks (concurrency, security, cross-module interfaces, subtle logic).
+- Agent files set no model; always pass one at dispatch, in the host's
+  spelling (Claude Code `haiku`/`sonnet`/`opus`, Copilot
+  `claude-haiku-5.5`/`claude-sonnet-5.5`/`claude-opus-5.5`): haiku for
+  explorer, verifier, doc-checker and mechanical tasks; sonnet for
+  implementation and review; opus for concurrency, security,
+  cross-module interfaces and subtle logic.
 - Design, spec writing, task briefing and triage of findings stay with
   you. Brief subagents fully: they see nothing of this conversation.
 

@@ -43,9 +43,9 @@ Each aspect below appears in the report.
    current, else the tree), CI, manifests, tests, config, deploys.
 3. **Dispatch.** `devflow:reviewer` in parallel, briefed with the aspect,
    area, files, baseline results and the aspect's checklist entry:
-   - Code: one reviewer per area; `model: "opus"` for security- or
-     correctness-critical areas. Security: one, on `model: "opus"`.
-   - Other aspects: one reviewer each, default model; on a small
+   - Code: one reviewer per area; opus for security- or
+     correctness-critical areas. Security: one, on opus.
+   - Other aspects: one reviewer each, on sonnet; on a small
      project aspects 4-8 may share one.
    - Over about 15 dispatches: propose what to cover first, and why.
 4. **Verify.** Check every finding against the code and drop those that

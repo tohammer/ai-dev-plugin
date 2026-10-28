@@ -1,7 +1,6 @@
 ---
 name: verifier
 description: Runs a project's build, test and lint commands and reports pass or fail with only the failing output. Use after an implementation step, or to extract the failures from a long build or CI log.
-model: haiku
 disallowedTools: Edit, Write, NotebookEdit, Agent
 ---
 

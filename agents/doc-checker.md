@@ -1,7 +1,6 @@
 ---
 name: doc-checker
 description: Compares a code change with the project documentation and lists what is stale or missing. Use at wrap-up, or to check docs consistency (README and docs/user commands, architecture, ADRs, backlog, next-steps, links).
-model: haiku
 disallowedTools: Edit, Write, NotebookEdit, Agent
 ---
 

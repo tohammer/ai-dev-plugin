@@ -14,7 +14,7 @@ orchestrating model and agent definitions for subagents. The only executable par
 | `core.md` | General instructions present in every session: workflow, docs layout, subagent and model rules, verification | — |
 | `hooks/` | SessionStart hook that prints `core.md` into the session | `core.md` |
 | `skills/` | One skill per phase: init, spec, implement, review, debug, wrapup, ship; `audit` (whole-project review), `userdocs` (user-facing docs), `test` (tests for existing code) and `describe` (writes PR and landing commit messages; loaded by `ship`) are not phases of the feature workflow. Loaded on demand. `spec` and `init` embed the document starting content; `init` also records the project's check commands | agents |
-| `agents/` | Subagent definitions with a default model each: explorer, verifier, doc-checker, implementer, reviewer. `implementer` holds the testing rules, `reviewer` checks them | — |
+| `agents/` | Subagent definitions, without a model (chosen per dispatch, ADR 0016): explorer, verifier, doc-checker, implementer, reviewer. `implementer` holds the testing rules, `reviewer` checks them | — |
 | `tests/run.sh` | Structure checks: hook output, frontmatter, size limits, references, the testing rules' key phrase in all three copies | all of the above |
 
 ## How it fits together
@@ -69,6 +69,10 @@ orchestrating model and agent definitions for subagents. The only executable par
 - A vague trigger for the PR diagram ("prose would need more than a
   paragraph") produced no diagram in smoke tests; concrete triggers (new
   component, new call path, changed state) did.
+- Model names differ per host for the same model: Claude Code accepts
+  `sonnet` and `claude-sonnet-5-5`, Copilot only `claude-sonnet-5.5`.
+  Claude Code's dispatch tool takes only the aliases. A `model:` in an
+  agent file breaks on one host, so the model is passed at dispatch.
 - Headless smoke test of one phase:
   `claude --plugin-dir . -p "/devflow:init" --permission-mode acceptEdits </dev/null`
   in a scratch repo; continue the same session with `-c -p "…"`.
