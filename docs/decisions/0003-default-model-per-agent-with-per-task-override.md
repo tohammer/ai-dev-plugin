@@ -1,7 +1,7 @@
 # 0003 — Default model per agent, overridden per task
 
 Date: 2026-10-03
-Status: accepted
+Status: superseded by [0016](0016-model-named-at-dispatch-per-host.md)
 
 ## Context
 

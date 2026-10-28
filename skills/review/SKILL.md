@@ -16,9 +16,9 @@ description: Review a change against its spec and for defects using reviewer sub
    the commands, tell the user which were used and offer to record them
    with `/devflow:init`. A stale or duplicate
    section: propose the fix to the user.
-   - Small, ordinary change: one reviewer, default model.
+   - Small, ordinary change: one reviewer on sonnet.
    - Large or critical change: several reviewers in parallel, one focus
-     each (spec conformance, correctness, security), on `model: "opus"`
+     each (spec conformance, correctness, security), on opus
      where the code is security- or correctness-critical.
 3. **Verify.** Check every finding against the code before acting on
    it. Drop those that do not hold, and say so. A reviewer's finding is

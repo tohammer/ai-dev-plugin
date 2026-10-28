@@ -22,6 +22,8 @@ has_field() { # has_field <file> <field>: field present in the frontmatter
         END { if (!found) exit 1 }' "$1"
 }
 
+not_has_field() { ! has_field "$@"; }
+
 # Manifests
 for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json hooks/hooks.json; do
     check "$f is valid JSON" python3 -m json.tool "$f"
@@ -56,9 +58,10 @@ done
 for name in explorer verifier doc-checker implementer reviewer; do
     f="agents/$name.md"
     check "$f exists" test -f "$f"
-    for field in name description model; do
+    for field in name description; do
         check "$f has $field" has_field "$f" "$field"
     done
+    check "$f sets no model" not_has_field "$f" model
 done
 
 # Testing rule key phrase is kept in sync, ADR 0010

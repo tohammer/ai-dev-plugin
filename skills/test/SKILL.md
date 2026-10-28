@@ -24,7 +24,7 @@ description: Add or repair tests for existing code - choose test levels, write c
    to the user when it has more than about five tests or needs a new
    framework or tool (a dependency decision, with an ADR).
 4. **Write.** Brief `devflow:implementer` with the plan and the testing
-   rules below. Default model; haiku for mechanical additions to an
+   rules below. Sonnet; haiku for mechanical additions to an
    existing pattern.
 5. **Flaky.** Reproduce by repeated runs (e.g. 50) and in random or
    reverse order where the runner allows. Look for the cause: timing

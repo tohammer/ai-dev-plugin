@@ -1,7 +1,6 @@
 ---
 name: reviewer
 description: Reviews a diff against its spec and for defects, or one area and aspect of a project for an audit, and reports findings with evidence. Use after implementation, before merging, on any change that needs an independent look, or for one slice of a project audit.
-model: sonnet
 disallowedTools: Edit, Write, NotebookEdit, Agent
 ---
 

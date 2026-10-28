@@ -112,6 +112,15 @@ stale. Google's guide asks to check that the description still matches
 before submitting. Origin: spec 2026-10-28 PR and merge messages, Scope,
 Out. Revisit when a PR gets commits after it was opened.
 
+## Claude-only assumptions in plugin text
+
+devflow also runs on GitHub Copilot. Model names were the first break
+(ADR 0016). Check the rest for Claude Code specifics: the SessionStart
+hook that prints `core.md`, the Artifact tool in `spec` Mockups,
+`claude plugin validate` and `claude -p` smoke tests, the scratchpad,
+`AGENTS.md` versus `CLAUDE.md`. Origin: user report 2026-10-28. Revisit
+before the next skill change that touches these.
+
 ## Migration and rollback section in the spec template
 
 Changes to data formats, schemas or config count as non-trivial, but

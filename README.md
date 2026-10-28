@@ -169,10 +169,13 @@ test results or review notes.
 
 ### Agents and models
 
-Each agent has a default model; the orchestrator overrides it per task,
-with opus for complex work:
+Agent files set no model, because hosts spell the same model
+differently. The orchestrator passes one at every dispatch, in the
+host's spelling: Claude Code `haiku`, `sonnet`, `opus`; Copilot
+`claude-haiku-5.5`, `claude-sonnet-5.5`, `claude-opus-5.5`. It uses the
+cheapest model that can do the task well, and opus for complex work:
 
-| Agent | Default model | Job |
+| Agent | Usual model | Job |
 |---|---|---|
 | `devflow:explorer` | haiku | Locate code, distil docs and logs. |
 | `devflow:verifier` | haiku | Run build, test and lint; report failures. |

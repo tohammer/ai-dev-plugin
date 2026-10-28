@@ -1,7 +1,6 @@
 ---
 name: implementer
 description: Implements one briefed task from a spec, with tests, and reports what changed and what was verified. Use for a single well-defined implementation task with clear acceptance criteria.
-model: sonnet
 disallowedTools: Agent
 ---
 
