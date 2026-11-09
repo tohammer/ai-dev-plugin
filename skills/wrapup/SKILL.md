@@ -7,7 +7,8 @@ description: Bring the documentation in line with a finished change - README, ar
 
 ## Steps
 
-1. **Check.** Dispatch `devflow:doc-checker` with the diff range and the
+1. **Check.** Dispatch `devflow:doc-checker` (haiku/medium; sonnet/low when
+   the change touches many docs) with the diff range and the
    spec path. For a small change, check the docs yourself.
 2. **Update.** Apply what is needed:
    - `README.md` and `docs/user/`: install steps, commands, flags,
@@ -29,7 +30,7 @@ description: Bring the documentation in line with a finished change - README, ar
    `docs/backlog.md` past about 150 lines, or with clearly distinct
    areas, becomes `docs/backlog/<area>.md`.
 4. **Verify.** Run the checks from `## Checks` one last time
-   (`devflow:verifier`). Without that section, determine the commands,
+   (`devflow:verifier` (haiku/low)). Without that section, determine the commands,
    tell the user which were used and offer to record them with
    `/devflow:init`. A stale or duplicate
    section: propose the fix to the user.

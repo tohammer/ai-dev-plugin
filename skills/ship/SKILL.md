@@ -57,7 +57,7 @@ what changed and why. Harness attribution lines come last.
    Branch not on top of the default branch: `rebase` rebases,
    `merge commit` merges the default branch in, `fast-forward` stops.
    Conflicts: stop, show the files, resolve only with the user.
-4. **Checks.** `devflow:verifier` runs every command in `## Checks`.
+4. **Checks.** `devflow:verifier` (haiku/low) runs every command in `## Checks`.
    Without it: determine the commands, say which, offer
    `/devflow:init`. Failure stops the ship (offer `/devflow:debug`);
    a check that could not run is not green.
@@ -94,6 +94,6 @@ what changed and why. Harness attribution lines come last.
    --heads` lists it (else `git fetch --prune`), `git branch -d`. After
    a GitHub rebase or squash merge `-d` refuses: ask before `-D` if the
    PR is merged and its head has all local commits, never otherwise.
-   After a local merge `devflow:verifier` checks the default branch.
+   After a local merge `devflow:verifier` (haiku/low) checks the default branch.
 10. **Report.** What landed where (commits, PR URL), check results, what
     was deleted, what was not done and why.

@@ -26,14 +26,38 @@ You orchestrate; subagents write the code.
    commands from `## Checks`), the mockup if the spec links one, and
    what not to touch. The subagent sees nothing else, so include the
    paths and facts it needs.
-2. **Pick the model** (host spelling per `core.md`). Default sonnet;
-   opus for tasks involving concurrency, security, cross-module
-   interfaces or subtle logic; haiku for mechanical ones (renames,
-   fixtures, boilerplate from an explicit pattern).
+2. **Pick the model** (host spelling per `core.md`). The spec's task
+   list marks tasks that meet an opus criterion with
+   `(opus: <criterion>)`.
+   - Marked: opus/high (2nd: opus/xhigh).
+   - Unmarked, ordinary: sonnet/medium (2nd: sonnet/high).
+   - Unmarked, mechanical (renames, fixtures, boilerplate from an
+     explicit pattern): haiku/medium (2nd: sonnet/low).
+
+   Do not add or drop marks; a mark that looks wrong goes to the user.
+   Specs dated before 2026-11-09 have no marks: for those only, apply
+   the opus criteria below and name the criterion in the brief. Use the
+   2nd choice up front when
+   the brief shows the task is harder than usual, and say why in the
+   brief.
+   The opus criteria:
+   1. Shared state under concurrency: threads, async tasks, processes
+      or concurrent requests read and write the same state.
+   2. Security boundary: authentication, authorization, secrets,
+      cryptography, or outside input reaching a shell, SQL, a template,
+      a file path or a deserializer.
+   3. Breaking change to a signature, behaviour, file format or schema
+      that existing code or stored data relies on (a new interface or
+      calling another module does not count).
+   4. Errors example tests rarely catch: floating-point precision,
+      dates and time zones, cache invalidation, state machines, parsers.
+
+   Unsure (older specs only): sonnet/medium, except criterion 2:
+   unsure there means opus/high.
 3. **Dispatch.** Tasks the spec marks as independent may run in
    parallel, provided they do not edit the same files.
 4. **Check.** Read the diff yourself against the acceptance criteria.
-   Have `devflow:verifier` run the checks from `## Checks`. Without
+   Have `devflow:verifier` (haiku/low) run the checks from `## Checks`. Without
    that section, determine the commands, tell the user which were used
    and offer to record them with `/devflow:init`. A stale or duplicate section:
    propose the fix to the user. Confirm that the tests the task names
@@ -45,8 +69,12 @@ You orchestrate; subagents write the code.
 
 ## When it goes wrong
 
-- A task that fails twice in a subagent: do it yourself or re-run it on
-  a stronger model with a brief that names what went wrong.
+- A task that fails twice in a subagent: do it yourself or re-run it at
+  its 2nd choice (without one, or after it, one step up the ladder)
+  with a brief that names what went wrong.
+  Ladder, weakest first: haiku/low, haiku/medium, sonnet/low,
+  sonnet/medium, sonnet/high (about opus/low), opus/medium, opus/high,
+  opus/xhigh.
 - A task that shows the spec is wrong or incomplete: stop and take the
   question to the user: what is wrong, the options with their pros and
   cons, and your recommendation with the reason it is better. Update

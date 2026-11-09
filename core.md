@@ -55,12 +55,12 @@ docs/next-steps.md                 what to do next, nothing else
 
 - Use a subagent when only the conclusion is needed or the work is
   separable. Do not spawn one for a small lookup.
-- Agent files set no model; always pass one at dispatch, in the host's
-  spelling (Claude Code `haiku`/`sonnet`/`opus`, Copilot
-  `claude-haiku-5.5`/`claude-sonnet-5.5`/`claude-opus-5.5`): haiku for
-  explorer, verifier, doc-checker and mechanical tasks; sonnet for
-  implementation and review; opus for concurrency, security,
-  cross-module interfaces and subtle logic.
+- Agent files set no model or effort. Pass the skill's `model/effort`
+  at every dispatch: model in the host's spelling (Claude Code
+  `haiku`/`sonnet`/`opus`, Copilot `claude-haiku-5.5`/
+  `claude-sonnet-5.5`/`claude-opus-5.5`), effort where the dispatch
+  tool takes one (never `max`; if rejected, drop it and tell the user).
+  Outside a skill: haiku/low for lookups, sonnet/medium otherwise.
 - Design, spec writing, task briefing and triage of findings stay with
   you. Brief subagents fully: they see nothing of this conversation.
 

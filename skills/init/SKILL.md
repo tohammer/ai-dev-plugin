@@ -58,7 +58,7 @@ docs/backlog.md  docs/next-steps.md
    (propose changes): in `AGENTS.md` if `CLAUDE.md` imports it, else in
    `CLAUDE.md`. Candidates: CI configuration (authoritative), then
    `justfile`, `Makefile`, manifest scripts, language defaults.
-   `devflow:verifier` runs each once; the user confirms or corrects the
+   `devflow:verifier` (haiku/low) runs each once; the user confirms or corrects the
    list with results. Failing because the code is broken is still
    right; not existing is not. One that cannot run is listed as not
    run, with the reason, and recorded if confirmed. Format:

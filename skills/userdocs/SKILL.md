@@ -16,7 +16,7 @@ with the reason.
 1. **Facts.** From the code, not the existing docs: install method and
    requirements, commands and `--help` output, flags, config file
    locations and keys, environment variables, defaults, precedence. For
-   a broad search dispatch `devflow:explorer` briefed with this list.
+   a broad search dispatch `devflow:explorer` (haiku/low) briefed with this list.
 2. **Readers.** Name the audience and the three to five tasks they come
    for. Ask the user when code and docs do not show it.
 3. **Sort.** Classify existing content as how-to, reference,

@@ -11,10 +11,10 @@ orchestrating model and agent definitions for subagents. The only executable par
 
 | Component | Responsibility | Depends on |
 |---|---|---|
-| `core.md` | General instructions present in every session: workflow, docs layout, subagent and model rules, verification | — |
+| `core.md` | General instructions present in every session: workflow, docs layout, subagent rules and the one-line model rule with the host spelling, verification | — |
 | `hooks/` | SessionStart hook that prints `core.md` into the session | `core.md` |
 | `skills/` | One skill per phase: init, spec, implement, review, debug, wrapup, ship; `audit` (whole-project review), `userdocs` (user-facing docs), `test` (tests for existing code) and `describe` (writes PR and landing commit messages; loaded by `ship`) are not phases of the feature workflow. Loaded on demand. `spec` and `init` embed the document starting content; `init` also records the project's check commands | agents |
-| `agents/` | Subagent definitions, without a model (chosen per dispatch, ADR 0016): explorer, verifier, doc-checker, implementer, reviewer. `implementer` holds the testing rules, `reviewer` checks them | — |
+| `agents/` | Subagent definitions, without a model or effort (chosen per dispatch, ADR 0016, 0017): explorer, verifier, doc-checker, implementer, reviewer. `implementer` holds the testing rules, `reviewer` checks them | — |
 | `tests/run.sh` | Structure checks: hook output, frontmatter, size limits, references, the testing rules' key phrase in all three copies | all of the above |
 
 ## How it fits together
@@ -23,8 +23,8 @@ orchestrating model and agent definitions for subagents. The only executable par
   context cost, so `core.md` is capped at 70 lines by a test.
 - `core.md` names the skills and agents. A skill is loaded when the user
   runs `/devflow:<name>` or the model matches its description.
-- Skills tell the orchestrator which agent to dispatch and when to
-  override its default model. Agents never dispatch further agents.
+- Skills tell the orchestrator which agent to dispatch and name the
+  `model/effort` for each dispatch. Agents never dispatch further agents.
 - A project's check commands live in a `## Checks` section of its
   `CLAUDE.md`, or of the `AGENTS.md` that `CLAUDE.md` imports. Both are
   in the context of every session and devflow agent, so skills and
@@ -76,3 +76,12 @@ orchestrating model and agent definitions for subagents. The only executable par
 - Headless smoke test of one phase:
   `claude --plugin-dir . -p "/devflow:init" --permission-mode acceptEdits </dev/null`
   in a scratch repo; continue the same session with `-c -p "…"`.
+  Phases that run git or tests need them allowed, e.g.
+  `--allowedTools "Bash(git:*)" "Bash(python3:*)"`; otherwise the run
+  stops at the first prompt. With `--output-format stream-json
+  --verbose`, `jq` on the Agent tool calls shows each dispatch's
+  `model` and `effort`.
+- Claude Code's dispatch tool takes `effort` (`low` … `max`) next to
+  `model`; skills pass both (ADR 0017). An `/devflow:implement` smoke
+  run on a three-task spec dispatched every agent at the skill's
+  choice and cost $1.35 over 34 turns.

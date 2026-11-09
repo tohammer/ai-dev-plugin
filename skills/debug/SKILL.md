@@ -58,8 +58,9 @@ open hypothesis next time.
 
 ## Subagents
 
-- `devflow:explorer` for reading long logs or locating code paths.
-- `devflow:verifier` for running test suites and extracting failures.
+- `devflow:explorer` (haiku/medium) for reading long logs or (haiku/low)
+  for locating code paths.
+- `devflow:verifier` (haiku/low) for running test suites and extracting failures.
 - Keep the reasoning about the cause with yourself.
 
 ## If stuck

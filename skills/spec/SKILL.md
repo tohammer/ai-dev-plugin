@@ -13,7 +13,8 @@ explanation, pros and cons per option, and a reasoned recommendation.
 
 1. **Explore.** Read the docs that frame the work: `docs/architecture.md`,
    related specs, ADRs in `docs/decisions/`, `docs/next-steps.md`. For a
-   broad code search dispatch `devflow:explorer`.
+   broad code search dispatch `devflow:explorer` at haiku/low; to condense
+   large sources haiku/medium, sonnet/low if that feeds a design choice.
 2. **Understand.** Write back in a few lines what you take the goal,
    constraints and success criteria to be. Ask for what is missing, one
    topic at a time; never assume it, never ask what code or docs answer.
@@ -42,6 +43,17 @@ The spec ends with ordered tasks, each a checkbox with acceptance
 criteria. A task is sized for one subagent: it names what to build, how
 to tell it is done and the tests or manual check that show it, not the
 code. Order them so each leaves the project working; mark parallel ones.
+
+A task meeting an opus criterion ends with `(opus: <criterion>)`; the
+user checks the marks at review, `implement` runs them at opus/high.
+Criteria: (1) shared state under concurrency: threads, async tasks,
+processes or requests writing the same state; (2) security boundary:
+auth, secrets, crypto, or outside input reaching a shell, SQL, template,
+file path or deserializer; (3) breaking change to a signature, format or
+schema existing code or data relies on, not a new interface; (4) errors
+tests rarely catch: floating point, time zones, cache invalidation,
+state machines, parsers. Unmarked is the norm; when unsure, do not mark,
+except for criterion 2.
 
 ## Mockups
 
@@ -97,4 +109,5 @@ UI paths the automated tests do not cover).
 Ordered, each sized for one subagent (see The task list).
 
 - [ ] 1. <Task>. *Done when* <criteria>, *shown by* <tests or manual check>.
+- [ ] 2. <Task>. *Done when* …, *shown by* …. (opus: security boundary)
 ````

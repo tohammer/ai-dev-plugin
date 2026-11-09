@@ -2,6 +2,7 @@
 
 Date: 2026-10-28
 Status: accepted
+Extended by [0017](0017-effort-named-at-dispatch-with-the-model.md), which replaces the tiers and the escalation rule.
 
 ## Context
 

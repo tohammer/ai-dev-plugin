@@ -37,17 +37,27 @@ Each aspect below appears in the report.
    Record commit (`git rev-parse HEAD`) and scope. Without the devflow
    layout, offer `/devflow:init`; if declined, step 7 lists proposed
    items in the report, not a backlog.
-2. **Baseline.** `devflow:verifier` runs `## Checks` (absent: determine
-   them, say which, offer `/devflow:init` to record them; stale or
-   duplicate: propose a fix). `devflow:explorer` inventories areas (`docs/architecture.md` if
-   current, else the tree), CI, manifests, tests, config, deploys.
+2. **Baseline.** `devflow:verifier` (haiku/low) runs `## Checks` (absent:
+   determine them, say which, offer `/devflow:init` to record them; stale or
+   duplicate: propose a fix). `devflow:explorer` (haiku/low) inventories areas
+   (`docs/architecture.md` if current, else the tree), CI, manifests, tests, config, deploys.
 3. **Dispatch.** `devflow:reviewer` in parallel, briefed with the aspect,
-   area, files, baseline results and the aspect's checklist entry:
-   - Code: one reviewer per area; opus for security- or
-     correctness-critical areas. Security: one, on opus.
-   - Other aspects: one reviewer each, on sonnet; on a small
-     project aspects 4-8 may share one.
+   area, files, baseline results and the aspect's checklist entry.
+   Choices are `model/effort`; the 2nd is for a harder task or a re-dispatch:
+   - Code: one per area, sonnet/high (2nd opus/medium); if it meets an opus
+     criterion, opus/high (2nd opus/xhigh). Security: one, opus/xhigh.
+   - Tests, Build and CI, Dependencies: sonnet/medium each (2nd sonnet/high).
+   - Documentation, Configuration, Repository hygiene: sonnet/low each (2nd
+     sonnet/medium). On a small project aspects 4-8 may share one, sonnet/medium.
    - Over about 15 dispatches: propose what to cover first, and why.
+   - Opus criteria (the brief names the one): (1) shared state under
+     concurrency; (2) security boundary: auth, secrets, cryptography, outside
+     input reaching a shell, SQL, a template, a file path or a deserializer;
+     (3) breaking change to what existing code or stored data relies on;
+     (4) errors tests rarely catch: precision, time zones, cache invalidation,
+     state machines, parsers. Unsure: not met, except for (2).
+   - Ladder, weakest first: haiku/low, haiku/medium, sonnet/low, sonnet/medium,
+     sonnet/high (about opus/low), opus/medium, opus/high, opus/xhigh.
 4. **Verify.** Check every finding against the code and drop those that
    do not hold. A finding is a lead, not a fact.
 5. **Rate.** Severity per confirmed finding:
@@ -94,7 +104,7 @@ Each aspect below appears in the report.
 - Build, tests or linters cannot run: a finding under Build and CI or
   Tests; aspects depending on them say so.
 - No CI, no tests, no docs: a finding, not a skipped aspect.
-- A reviewer fails or returns nothing usable: re-dispatch once, on a
-  stronger model if weaker; else list it as not covered.
+- A reviewer fails or returns nothing usable: re-dispatch once at its 2nd
+  choice, or one step up the ladder if possible; else list it as not covered.
 - Dependency audit tool missing: assess from manifests, note the gap
   under "Not covered"; never install tools without asking.
