@@ -127,3 +127,15 @@ Changes to data formats, schemas or config count as non-trivial, but
 the spec template does not ask how existing data is handled. Add an
 optional section: compatibility with existing data, migration path,
 rollback. Origin: workflow gap analysis 2026-10-18.
+
+## Cost comparison of model and effort choices
+
+The ladder in ADR 0017 puts sonnet/high about level with opus/low, from
+prices and model guidance, not measurement. Run the comparison from the
+Testing section of `docs/specs/2026-11-09-model-and-effort.md`: the same
+small implementation tasks headless at sonnet/medium, sonnet/high and
+opus/low, recording `total_cost_usd`, turns and review result. It
+decides whether row 7 stays at sonnet/medium and whether rows 13 and 14
+keep opus/low as 2nd choice. Origin: spec task 11, deferred by the user
+on 2026-11-09 to limit spend. Revisit before 1.0, or when real use
+shows a choice too weak or too costly.

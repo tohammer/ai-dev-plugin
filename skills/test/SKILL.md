@@ -11,7 +11,7 @@ description: Add or repair tests for existing code - choose test levels, write c
    from the `## Checks` section of CLAUDE.md (or the AGENTS.md it
    imports). If there is none, determine them, tell the user which you
    used and offer to record them via devflow:init. Baseline:
-   `devflow:verifier` runs the tests, and the coverage command if the
+   `devflow:verifier` (haiku/low) runs the tests, and the coverage command if the
    project has one.
 2. **Survey.** Find the existing framework, test levels, helpers,
    fixtures and naming. New tests follow them.
@@ -24,19 +24,35 @@ description: Add or repair tests for existing code - choose test levels, write c
    to the user when it has more than about five tests or needs a new
    framework or tool (a dependency decision, with an ADR).
 4. **Write.** Brief `devflow:implementer` with the plan and the testing
-   rules below. Sonnet; haiku for mechanical additions to an
-   existing pattern.
+   rules below (host spelling per `core.md`).
+   - Additions that follow an existing pattern: haiku/medium (2nd:
+     sonnet/medium).
+   - New or characterization tests: sonnet/medium (2nd: sonnet/high).
+   - New or characterization tests for code that meets an opus
+     criterion, instead of the line above (shared state under
+     concurrency; security boundary; breaking change to something
+     existing code or data relies on; errors example tests rarely
+     catch, such as floating point, time zones, cache invalidation,
+     state machines, parsers): opus/high (2nd: opus/xhigh). Name the
+     criterion in the brief. Unsure: sonnet/medium, except security:
+     opus/high.
+   - A task that fails twice: re-run it at its 2nd choice (without one,
+     one step up the ladder) with a brief that names what went wrong,
+     or do it yourself. Ladder,
+     weakest first: haiku/low, haiku/medium, sonnet/low, sonnet/medium,
+     sonnet/high (about opus/low), opus/medium, opus/high, opus/xhigh.
 5. **Flaky.** Reproduce by repeated runs (e.g. 50) and in random or
    reverse order where the runner allows. Look for the cause: timing
    and sleeps, order dependence and shared state, time and time zones,
    randomness without a seed, network or external services,
-   concurrency. `devflow:verifier` runs the repetitions;
-   `devflow:implementer` fixes the cause, briefed with the evidence. No
+   concurrency. `devflow:verifier` (haiku/low) runs the repetitions;
+   `devflow:implementer` (opus/medium, 2nd opus/high) fixes the cause,
+   briefed with the evidence. No
    retries, longer sleeps or skips.
    Not reproducible or cause not found: report the runs made and add a
    backlog item. Quarantine the test (skipped, with a marker naming
    the backlog item) only with the user's approval.
-6. **Verify.** `devflow:verifier` runs all checks. Every new test was
+6. **Verify.** `devflow:verifier` (haiku/low) runs all checks. Every new test was
    seen failing: in the implementer report, or have the implementer
    break the code briefly and restore it.
 7. **Report.** Tests added per behaviour and level, coverage before and

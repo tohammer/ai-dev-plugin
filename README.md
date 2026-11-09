@@ -169,19 +169,59 @@ test results or review notes.
 
 ### Agents and models
 
-Agent files set no model, because hosts spell the same model
-differently. The orchestrator passes one at every dispatch, in the
-host's spelling: Claude Code `haiku`, `sonnet`, `opus`; Copilot
-`claude-haiku-5.5`, `claude-sonnet-5.5`, `claude-opus-5.5`. It uses the
-cheapest model that can do the task well, and opus for complex work:
+Agent files set no model or effort, because hosts spell models
+differently. Each skill names a model and a reasoning effort for every
+dispatch, written `model/effort` (e.g. `sonnet/medium`). The model is
+passed in the host's spelling: Claude Code `haiku`, `sonnet`, `opus`;
+Copilot `claude-haiku-5.5`, `claude-sonnet-5.5`, `claude-opus-5.5`. The
+effort (`low`, `medium`, `high`, `xhigh`, never `max`) is passed where
+the host's dispatch tool takes one.
 
-| Agent | Usual model | Job |
+| Agent | Job |
+|---|---|
+| `devflow:explorer` | Locate code, distil docs and logs. |
+| `devflow:verifier` | Run build, test and lint; report failures. |
+| `devflow:doc-checker` | Find stale or missing docs for a change. |
+| `devflow:implementer` | Implement one briefed task with tests. |
+| `devflow:reviewer` | Review a diff, or an area and aspect for an audit; report findings with evidence. |
+
+The choice follows the task, not the agent. The 2nd choice is for a
+harder task (the brief says why) or a re-dispatch after failures:
+
+| Task | 1st | 2nd |
 |---|---|---|
-| `devflow:explorer` | haiku | Locate code, distil docs and logs. |
-| `devflow:verifier` | haiku | Run build, test and lint; report failures. |
-| `devflow:doc-checker` | haiku | Find stale or missing docs for a change. |
-| `devflow:implementer` | sonnet | Implement one briefed task with tests. |
-| `devflow:reviewer` | sonnet | Review a diff, or an area and aspect for an audit; report findings with evidence. |
+| Find code or symbols | haiku/low | — |
+| Run checks, extract failures | haiku/low | — |
+| Condense docs, logs or sources | haiku/medium | sonnet/low |
+| Check docs for a change | haiku/medium | sonnet/low |
+| Mechanical implementation | haiku/medium | sonnet/low |
+| Ordinary implementation | sonnet/medium | sonnet/high |
+| Task marked with an opus criterion | opus/high | opus/xhigh |
+| Tests following an existing pattern | haiku/medium | sonnet/medium |
+| New or characterization tests | sonnet/medium | sonnet/high |
+| Fix a flaky test | opus/medium | opus/high |
+| Fix review findings | sonnet/medium | opus/high |
+| Review a small change | sonnet/high | opus/low |
+| Review a small change with an opus-criterion part | opus/medium | — |
+| Review a large change: spec conformance | sonnet/medium | opus/low |
+| Review a large change: correctness | opus/medium | opus/high |
+| Review a large change: security | opus/high | opus/xhigh |
+| Audit a code area | sonnet/high | opus/medium |
+| Audit a code area meeting an opus criterion | opus/high | opus/xhigh |
+| Audit security | opus/xhigh | — |
+| Audit tests, build and CI, dependencies | sonnet/medium | sonnet/high |
+| Audit docs, configuration, hygiene | sonnet/low | sonnet/medium |
+
+A task gets opus only if it meets an opus criterion: shared state under
+concurrency; a security boundary (authentication, secrets,
+cryptography, outside input reaching a shell, SQL, a template, a path
+or a deserializer); a breaking change to what existing code or data
+relies on; errors example tests rarely catch (precision, time zones,
+cache invalidation, state machines, parsers). `spec` marks such tasks
+`(opus: <criterion>)` so you see and correct them at review.
+Without a 2nd choice, escalation goes one step up the ladder: haiku/low,
+haiku/medium, sonnet/low, sonnet/medium, sonnet/high (about opus/low),
+opus/medium, opus/high, opus/xhigh.
 
 ## Development
 

@@ -9,8 +9,10 @@ Goal: 1.0.0, a promise that what projects depend on does not break
 without a major version. Items in rough order:
 
 1. Run devflow on Copilot after updating to 0.2.0: model names
-   `claude-haiku-5.5` and `claude-opus-5.5`, and whether the
-   SessionStart hook brings `core.md` into the session. Then check the
+   `claude-haiku-5.5` and `claude-opus-5.5`, whether its dispatch tool
+   takes an effort (ADR 0017; record the answer in
+   `docs/architecture.md`), and whether the SessionStart hook brings
+   `core.md` into the session. Then check the
    other Claude Code specifics (backlog: "Claude-only assumptions in
    plugin text").
 2. Use every skill on real projects, not only in smoke tests, and
